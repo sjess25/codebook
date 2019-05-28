@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 
 class login : AppCompatActivity() {
 
@@ -15,8 +16,13 @@ class login : AppCompatActivity() {
         val blogin = findViewById<Button>(R.id.login_enter)
 
         blogin.setOnClickListener( View.OnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            if (Network.vNetwork(this)){
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Sin conexion", Toast.LENGTH_LONG).show()
+            }
+
         } )
     }
 }
