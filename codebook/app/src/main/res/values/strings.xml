@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">codebook</string>
+    <string name="welcome_text">Welcome!</string>
+    <string name="signup_instructions">Please sign up below</string>
 </resources>

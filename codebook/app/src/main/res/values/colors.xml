@@ -7,4 +7,8 @@
     <color name="colorUAMC">#F4812C</color>
     <color name="colorBgUAMC">#F7F7F7</color>
     <color name="blackUAMC">#222222</color>
+    <color name="trueBlack">#000000</color>
+    <color name="trueWhite">#FFFFFF</color>
+    <color name="colorFacebook">#3B5998</color>
+    <color name="colorGMail">#C71610</color>
 </resources>
