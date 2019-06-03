@@ -9,7 +9,7 @@ server.use(parser.urlencoded({
 }));
 server.use(parser.json());
 
-// http://URL:81/login?user=usuario&password=contraseña
+// http://35.229.58.165:81/login?user=usuario&password=contraseña
 server.get('/login', function (req, res) {
   var usr = req.query.user;
   var pss = req.query.password;
