@@ -6,8 +6,12 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.android.volley.Request
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+
+import org.json.JSONObject
+
 
 object Network {
 
@@ -27,9 +31,20 @@ object Network {
 
         val request = StringRequest(Request.Method.GET, url, listener, Response.ErrorListener {
             error ->
-            Log.d("volley error", error.message)
+            Log.d("volley get error", error.message)
         })
+        queue.add(request)
+    }
 
+
+    fun postHTTP(activityContext: Context, url: String, dataPost: JSONObject, listener: Response.Listener<JSONObject>) {
+
+        val queue = Volley.newRequestQueue(activityContext)
+
+        val request = JsonObjectRequest(Request.Method.POST, url, dataPost, listener, Response.ErrorListener {
+            error ->
+            Log.d("volley post error", error.message)
+        })
         queue.add(request)
     }
 }

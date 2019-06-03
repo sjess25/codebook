@@ -28,7 +28,7 @@ class login : AppCompatActivity() {
             if (Network.vNetwork(this)){
                 val intent = Intent(this, MainActivity::class.java)
                 dataUser.create(editNickname.getText().toString(), editPassword.getText().toString())
-                Network.getHTTP(this, "http://35.229.58.165:81/login?user=${dataUser.getnickName()}&password=${dataUser.getPassword()}", Response.Listener<String>{
+                Network.getHTTP(this, "http://35.231.202.82:81/login?user=${dataUser.getnickName()}&password=${dataUser.getPassword()}", Response.Listener<String>{
                         response ->
                     try {
                         if (response == "0") {
