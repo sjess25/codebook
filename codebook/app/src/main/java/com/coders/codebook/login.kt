@@ -47,7 +47,6 @@ class login : AppCompatActivity() {
                         Toast.makeText(C, e.message, Toast.LENGTH_SHORT).show()
                     }
                 })
-                //Toast.makeText(this, dataUser.getnickName() + " " + dataUser.getPassword(), Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(C, "Sin conexion", Toast.LENGTH_LONG).show()
             }
@@ -55,7 +54,6 @@ class login : AppCompatActivity() {
         } )
 
         bsignup.setOnClickListener(View.OnClickListener {
-            //Toast.makeText(this, "registrarse", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, signup::class.java)
             startActivity(intent)
         })

@@ -26,6 +26,7 @@ class signup : AppCompatActivity() {
         val editPassword = findViewById<EditText>(R.id.password_signup)
         val editEmail = findViewById<EditText>(R.id.email_signup)
 
+
         bregistrer.setOnClickListener {
             if (Network.vNetwork(this)){
                 val nickName = editNickname.getText().toString()
@@ -44,9 +45,16 @@ class signup : AppCompatActivity() {
                     Network.postHTTP(this, "http://35.231.202.82:81/register", jsonObject, Response.Listener<JSONObject>{
                         response ->
                         try {
-                            startActivity(intent)
+                            //val respJson: String = response.get("result").toString()
+                            //Toast.makeText(this, respJson, Toast.LENGTH_LONG).show()
+                            if (response.get("result").toString() == "success"){
+                                Toast.makeText(this, "registered user", Toast.LENGTH_LONG).show()
+                                startActivity(intent)
+                            } else {
+                                Toast.makeText(this, response.get("data").toString(), Toast.LENGTH_LONG).show()
+                            }
                         }catch (e:Exception){
-
+                            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
                         }
                     })
                 }
