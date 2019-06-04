@@ -27,11 +27,22 @@
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"/>
     </android.support.constraint.ConstraintLayout>
-    <ListView
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="157dp" android:background="@color/colorBgUAMC"/>
-    <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:background="@color/colorBgUAMC"
-            android:id="@+id/myChallengeList"/>
+            android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <Button
+                    android:text="Publicar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/newChallenge"
+                    android:layout_marginTop="20dp" android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="20dp"/>
+            <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="496dp" android:background="@color/colorBgUAMC"
+                    android:id="@+id/myChallengeList">
+            </ListView>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

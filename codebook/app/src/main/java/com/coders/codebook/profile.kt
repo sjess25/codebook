@@ -13,20 +13,21 @@ class profile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        var miChallenges: ArrayList<String> = ArrayList()
+        var miChallenges: ArrayList<technology> = ArrayList()
 
-        miChallenges.add("Reto 1")
-        miChallenges.add("Reto 2")
-        miChallenges.add("Reto 3")
-        miChallenges.add("Reto 4")
+        miChallenges.add(technology("Hola Mundo", "Hola mundo en C", R.drawable.c))
+        miChallenges.add(technology("Hola Mundo", "Hola mundo en Java", R.drawable.java))
+        miChallenges.add(technology("Hola Mundo", "Hola mundo en Ruby", R.drawable.ruby))
+        miChallenges.add(technology("Hola Mundo", "Hola mundo en Prolog", R.drawable.prolog))
 
         val listChallenge = findViewById<ListView>(R.id.myChallengeList)
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, miChallenges)
+        //val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, miChallenges)
+        val adapter = custumAdapter(this, miChallenges)
 
         listChallenge.adapter = adapter
 
         listChallenge.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-            Toast.makeText(this, miChallenges.get(position), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, miChallenges.get(position).title, Toast.LENGTH_LONG).show()
         }
     }
 }
