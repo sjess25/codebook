@@ -32,5 +32,6 @@
             android:layout_height="157dp" android:background="@color/colorBgUAMC"/>
     <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:background="@color/colorBgUAMC"/>
+            android:layout_height="match_parent" android:background="@color/colorBgUAMC"
+            android:id="@+id/myChallengeList"/>
 </LinearLayout>

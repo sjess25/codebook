@@ -54,5 +54,5 @@
             android:textSize="30sp" android:textColor="#FFFFFF"/>
     <ListView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" android:background="#00C7BFBF"/>
+            android:layout_height="match_parent" android:background="#00C7BFBF" android:id="@+id/feeds"/>
 </LinearLayout>
