@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".CreatePost" android:background="@color/colorUAMC" android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/toolbar_layout">
+
+        <Button
+                android:text="@string/back_label"
+                android:layout_width="64dp"
+                android:layout_height="48dp" android:id="@+id/back_button"
+                android:background="@color/colorUAMC" android:textColor="@color/colorBgUAMC" android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+        <TextView
+                android:text="@string/header_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/header" android:layout_weight="1"
+                android:textSize="25sp"
+                android:textColor="@color/colorBgUAMC"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/post_button"
+                app:layout_constraintStart_toEndOf="@+id/back_button" android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_bias="0.016" android:layout_marginTop="4dp"/>
+        <Button
+                android:text="@string/post_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/post_button" android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:textColor="@color/colorBgUAMC" android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/screen_scrolling" android:background="@color/colorBgUAMC"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/child_screenScrolling">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/header_layout">
+                <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/challenge_tittle" android:layout_weight="1"
+                        android:hint="Titulo llamativo para el reto" android:textSize="24sp"
+                        android:textStyle="bold|italic"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/popup_layout">
+                <Button
+                        android:text="Lenguaje"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/languages_popup" android:layout_weight="1"
+                        android:layout_marginStart="5dp" android:layout_marginEnd="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"/>
+                <Button
+                        android:text="Dificultad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/dificulty_popup" android:layout_weight="1"
+                        android:layout_marginStart="5dp" android:layout_marginEnd="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"/>
+                <Button
+                        android:text="Tiempo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/time_popup" android:layout_weight="1"
+                        android:layout_marginStart="5dp" android:layout_marginEnd="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" android:layout_weight="10" android:id="@+id/description_layout">
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="322dp"
+                        android:inputType="textMultiLine"
+                        android:gravity="start|top"
+                        android:ems="10"
+                        android:id="@+id/challenge_description" android:hint="Describe aqui el reto"/>
+                <TextView
+                        android:text="@string/warning_bibliography"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/warnig_challenge"
+                        android:textSize="16sp"/>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/link_1" android:hint="@string/hint_url"/>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/link_2" android:hint="@string/hint_url"/>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/link_3" android:hint="@string/hint_url"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

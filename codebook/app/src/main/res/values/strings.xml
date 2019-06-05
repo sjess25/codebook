@@ -2,4 +2,29 @@
     <string name="app_name">codebook</string>
     <string name="welcome_text">Welcome!</string>
     <string name="signup_instructions">Please sign up below</string>
+    <string name="header_toolbar">Nuevo reto</string>
+    /*Strings for actions*/
+    <string name="back_label">X</string>
+    <string name="post_label">Publicar</string>
+    /*Strings for languages*/
+    <string name="c_label">C</string>
+    <string name="java_label">Java</string>
+    <string name="prolog_label">Prolog</string>
+    <string name="ruby_label">Ruby</string>
+    <string name="python_label">Python</string>
+    <string name="javascript_label">JavaScript</string>
+    /*difficulty levels*/
+    <string name="lvl1_label">1</string>
+    <string name="lvl2_label">2</string>
+    <string name="lvl3_label">3</string>
+    <string name="lvl4_label">4</string>
+    <string name="lvl5_label">5</string>
+    /*Timers*/
+    <string name="time1_label">1 dia</string>
+    <string name="time2_label">2 dias</string>
+    <string name="time3_label">4 dias</string>
+    <string name="time4_label">7 dias</string>
+    /*Notices*/
+    <string name="warning_bibliography">*Puedes agregar enlaces a bibliografia, documentos o informacion que puede ser de ayuda para quien tome el reto</string>
+    <string name="hint_url">https://</string>
 </resources>

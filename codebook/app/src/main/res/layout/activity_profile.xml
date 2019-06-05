@@ -35,7 +35,7 @@
             <Button
                     android:text="Publicar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/newChallenge"
+                    android:layout_height="wrap_content" android:id="@+id/createPost_button"
                     android:layout_marginTop="20dp" android:layout_marginHorizontal="10dp"
                     android:layout_marginBottom="20dp"/>
             <ListView

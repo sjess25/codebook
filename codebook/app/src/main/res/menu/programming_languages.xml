@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/c_language"
+            android:title="@string/c_label"/>
+    <item
+            android:id="@+id/java_language"
+            android:title="@string/java_label"/>
+    <item
+            android:id="@+id/prolog_language"
+            android:title="@string/prolog_label"/>
+    <item
+            android:id="@+id/ruby_language"
+            android:title="@string/ruby_label"/>
+</menu>
