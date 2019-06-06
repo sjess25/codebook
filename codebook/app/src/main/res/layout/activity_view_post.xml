@@ -51,13 +51,12 @@
                         android:layout_weight="1"
                         android:textSize="18sp" android:textAlignment="textEnd" android:textStyle="bold"/>
             </LinearLayout>
-            <EditText
+            <TextView
+                    android:text="Aqui deberia ir la descripcion del reto"
                     android:layout_width="match_parent"
-                    android:layout_height="358dp"
-                    android:inputType="textMultiLine"
-                    android:gravity="start|top"
-                    android:ems="10"
-                    android:id="@+id/challenge_description" android:text="Aqui deberia ir la descripcion del reto"/>
+                    android:layout_height="wrap_content" android:id="@+id/challenge_description"
+                    android:layout_weight="8"
+                    android:lines="20" android:textSize="16sp"/>
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"

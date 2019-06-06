@@ -6,6 +6,7 @@
     /*Strings for actions*/
     <string name="back_label">X</string>
     <string name="post_label">Publicar</string>
+    <string name="next_label">Siguiente</string>
     /*Strings for languages*/
     <string name="c_label">C</string>
     <string name="java_label">Java</string>
@@ -25,8 +26,11 @@
     <string name="time3_label">4 dias</string>
     <string name="time4_label">7 dias</string>
     /*Notices*/
-    <string name="warning_bibliography">*Puedes agregar enlaces a bibliografia, documentos o informacion que puede ser de ayuda para quien tome el reto</string>
+    <string name="warning_bibliography">*Puedes agregar enlaces a bibliografia, documentos o informacion que pueden ser
+        de ayuda para quien tome el reto</string>
     <string name="hint_url">https://</string>
+    <string name="warning_post_solution">*Para publicar tu reto debes de conocer la solucion</string>
+    <string name="hint_solution_techer">Por favor ingrese la solucion aqui...</string>
     /*Variables? aun no se como se usan*/
     <string name="nickname_label">"@Usuario"</string>
     <string name="follow_label">Seguir</string>
