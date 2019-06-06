@@ -1,7 +1,9 @@
 package com.coders.codebook
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -13,6 +15,9 @@ class CreatePost : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_post)
+
+        /*Boton para publicar*/
+        val bpost = findViewById<Button>(R.id.post_button)
 
         /*Botones de los menu*/
         val bpopup_languages = findViewById<Button>(R.id.languages_popup)
@@ -46,5 +51,9 @@ class CreatePost : AppCompatActivity() {
             }
             popup_t.show()
         }
+        bpost.setOnClickListener(View.OnClickListener {
+            val intent_post = Intent(this, ViewPost::class.java)
+            startActivity(intent_post)
+        })
     }
 }

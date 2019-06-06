@@ -14,7 +14,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".newPost">
+        <activity android:name=".ViewPost">
         </activity>
         <activity android:name=".CreatePost">
         </activity>

@@ -14,11 +14,11 @@
     <string name="python_label">Python</string>
     <string name="javascript_label">JavaScript</string>
     /*difficulty levels*/
-    <string name="lvl1_label">1</string>
-    <string name="lvl2_label">2</string>
-    <string name="lvl3_label">3</string>
-    <string name="lvl4_label">4</string>
-    <string name="lvl5_label">5</string>
+    <string name="lvl1_label">Nivel 1</string>
+    <string name="lvl2_label">Nivel 2</string>
+    <string name="lvl3_label">Nivel 3</string>
+    <string name="lvl4_label">Nivel 4</string>
+    <string name="lvl5_label">Nivel 5</string>
     /*Timers*/
     <string name="time1_label">1 dia</string>
     <string name="time2_label">2 dias</string>
@@ -27,4 +27,12 @@
     /*Notices*/
     <string name="warning_bibliography">*Puedes agregar enlaces a bibliografia, documentos o informacion que puede ser de ayuda para quien tome el reto</string>
     <string name="hint_url">https://</string>
+    /*Variables? aun no se como se usan*/
+    <string name="nickname_label">"@Usuario"</string>
+    <string name="follow_label">Seguir</string>
+    <string name="unfollow_label">Dejar de seguir</string>
+    /*interactions labels*/
+    <string name="acceptChallenge">Aceptar Desafio</string>
+    <string name="like_label">Me gusta</string>
+    <string name="dislike_label">No me gusta</string>
 </resources>
