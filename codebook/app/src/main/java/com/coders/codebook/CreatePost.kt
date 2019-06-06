@@ -23,7 +23,7 @@ class CreatePost : AppCompatActivity() {
             val popup_l = PopupMenu(this, bpopup_languages)
             popup_l.inflate(R.menu.programming_languages)
             popup_l.setOnMenuItemClickListener {
-                Toast.makeText(this, "Item : " + it.title,Toast.LENGTH_SHORT).show()
+                bpopup_languages.setText(it.title)
                 true
             }
             popup_l.show()
@@ -32,7 +32,7 @@ class CreatePost : AppCompatActivity() {
             val popup_d = PopupMenu(this, bpopup_dificulty)
             popup_d.inflate(R.menu.difficulties)
             popup_d.setOnMenuItemClickListener{
-                Toast.makeText(this, "Item : " + it.title, Toast.LENGTH_SHORT).show()
+                bpopup_dificulty.setText(it.title)
                 true
             }
             popup_d.show()
@@ -41,7 +41,7 @@ class CreatePost : AppCompatActivity() {
             val popup_t = PopupMenu(this, bpopup_time)
             popup_t.inflate(R.menu.timers)
             popup_t.setOnMenuItemClickListener {
-                Toast.makeText(this, "Item : " + it.title, Toast.LENGTH_SHORT).show()
+                bpopup_time.setText(it.title)
                 true
             }
             popup_t.show()

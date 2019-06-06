@@ -37,6 +37,17 @@ object Network {
     }
 
 
+    fun getJson(activityContext: Context, url: String, dataGet: JSONObject, listener: Response.Listener<JSONObject>){
+
+        val queue = Volley.newRequestQueue(activityContext)
+
+        val request = JsonObjectRequest(Request.Method.POST, url, dataGet, listener, Response.ErrorListener {
+                error ->
+            Log.d("volley getJson error", error.message)
+        })
+        queue.add(request)
+    }
+
     fun postHTTP(activityContext: Context, url: String, dataPost: JSONObject, listener: Response.Listener<JSONObject>) {
 
         val queue = Volley.newRequestQueue(activityContext)
