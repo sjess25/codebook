@@ -70,9 +70,11 @@
                         android:textColor="@color/blackUAMC"
                         android:layout_marginStart="5dp"/>
                 <TextView
-                        android:text="TextView"
+                        android:text="@string/dislikeMeter_label"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent" android:id="@+id/textView4" android:layout_weight="1"/>
+                        android:layout_height="match_parent" android:id="@+id/like_meter" android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:gravity="center"/>
                 <Button
                         android:text="@string/dislike_label"
                         android:layout_width="wrap_content"
@@ -82,9 +84,11 @@
                         android:textColor="@color/colorBgUAMC"
                         android:layout_marginEnd="5dp"/>
                 <TextView
-                        android:text="TextView"
+                        android:text="@string/dislikeMeter_label"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent" android:id="@+id/dislike_meter" android:layout_weight="1"/>
+                        android:layout_height="match_parent" android:id="@+id/dislike_meter" android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:gravity="center"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"

@@ -16,7 +16,7 @@ class PostSololution : AppCompatActivity() {
         val bpost = findViewById<Button>(R.id.next_button)
 
         bpost.setOnClickListener(View.OnClickListener {
-            val intent_post = Intent(this, ViewPost::class.java)
+            val intent_post = Intent(this, profile::class.java)
             startActivity(intent_post)
         })
     }

@@ -35,6 +35,8 @@
     <string name="nickname_label">"@Usuario"</string>
     <string name="follow_label">Seguir</string>
     <string name="unfollow_label">Dejar de seguir</string>
+    <string name="likeMeter_label">0</string>
+    <string name="dislikeMeter_label">0</string>
     /*interactions labels*/
     <string name="acceptChallenge">Aceptar Desafio</string>
     <string name="like_label">Me gusta</string>
