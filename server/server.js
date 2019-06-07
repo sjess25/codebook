@@ -1,23 +1,9 @@
 const express = require('express');
-const mysql = require('mysql');
 const server = express();
 
+const requests = require('./requests');
+
 const parser = require('body-parser');
-
-// misc functions
-
-function sqlQuery(sql, callback) {
-  var con = mysql.createConnection({
-    host: 'localhost',
-    user: 'jess',
-    password: '1qaz!QAZ,.,',
-    database: 'codebook'
-  });
-
-  con.query(sql, callback);
-
-  con.end();
-}
 
 server.use(parser.urlencoded({
   extended: true
@@ -34,31 +20,58 @@ server.get('/login', function (req, res) {
   var usr = req.query.user;
   var pss = req.query.password;
 
-  var sql = `SELECT Password FROM Users WHERE NickName = "${usr}" OR Email = "${usr}";`;
+  console.log(req.rawHeaders + '\n\n');
 
-  console.log(`Petición de login.\n${sql}`);
+  requests.login(usr, pss, function (ans) {
+    res.send(ans);
+  });
+});
 
-  sqlQuery(sql,
-    function (error, results, fields) {
-      if (error) {
-        console.error(error);
-        res.send(`Error al realizar la consulta. ${error}`);
-      } else {
-        if (results) {
-          if (results.length > 0) {
-            if (results[0].Password == pss) {
-              res.send('0');
-            } else {
-              res.send('1');
-            }
-          } else {
-            res.send('2');
-          }
-        } else {
-          res.send('2');
-        }
-      }
-    });
+server.post('/data', function (req, res) {
+  console.log(JSON.stringify(req.body));
+  if (Array.isArray(req.body)) {
+    req.body = req.body[0];
+    console.error('Was array');
+  }
+
+  var id = Number(req.body.ID);
+
+  console.log(req.rawHeaders + '\n\n');
+
+  switch (id) {
+    case 0: // user data
+        var usr = req.body.User;
+        var pss = req.body.Password;
+
+        requests.login(usr, pss, function (ans) {
+          console.log(JSON.stringify(ans, 2) + '\n\n');
+          res.send(ans);
+        }, true);
+      break;
+
+    case 1: // challenges list
+      var from = req.body.Owner;
+      requests.listChallenges(from, function (ans) {
+        console.log(JSON.stringify(ans, 2) + '\n\n');
+        res.send(ans);
+      });
+      break;
+
+    case 2: // specific challenge
+      var what = req.body.Challenge;
+      requests.getChallenge(what, function (ans) {
+        console.log(JSON.stringify(ans, 2) + '\n\n');
+        res.send(ans);
+      });
+      break;
+  
+    default:
+      res.send({
+        status: 'error',
+        data: 'Invalid request.'
+      });
+      break;
+  }
 });
 
 server.post('/register', function (req, res) {
@@ -67,31 +80,10 @@ server.post('/register', function (req, res) {
   var pass = req.body.Password;
   var name = req.body.Name;
 
-  var sql = `INSERT INTO Users (NickName, Email, Password, Name)
-              VALUES ("${nick}", "${mail}", "${pass}", "${name}");`;
+  console.log(req.rawHeaders + '\n\n');
 
-  console.log(`Registrando usuario.\n${sql}`);
-
-  sqlQuery(sql, function (error, results, fields) {
-    if (error) {
-      console.error(error);
-      res.send({
-        result: "error",
-        data: error.message
-      });
-    } else {
-      if (results.insertId) {
-        res.send({
-          result: "success",
-          data: results.insertId
-        });
-      } else {
-        res.send({
-          result: "error",
-          data: "Failed at insertion."
-        });
-      }
-    }
+  requests.register(nick, mail, pass, name, function (ans) {
+    res.send(ans);
   });
 });
 
