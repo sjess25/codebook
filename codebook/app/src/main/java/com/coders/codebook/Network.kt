@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.android.volley.Request
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import org.json.JSONArray
 
 import org.json.JSONObject
 
@@ -55,6 +57,20 @@ object Network {
         val request = JsonObjectRequest(Request.Method.POST, url, dataPost, listener, Response.ErrorListener {
             error ->
             Log.d("volley post error", error.message)
+        })
+        queue.add(request)
+    }
+
+
+    fun getJsonArray(activityContext: Context, url: String, dataGet: JSONArray, listener: Response.Listener<JSONArray>){
+
+        val queue = Volley.newRequestQueue(activityContext)
+
+        //val jsonList =JSONArray(dataGet.toString())
+
+        val request = JsonArrayRequest(Request.Method.POST, url, dataGet, listener, Response.ErrorListener {
+                error ->
+            Log.d("volley getJsonArray error", error.message)
         })
         queue.add(request)
     }

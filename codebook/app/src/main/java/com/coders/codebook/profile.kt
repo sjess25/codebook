@@ -3,8 +3,13 @@ package com.coders.codebook
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
+import com.android.volley.Response
+import org.json.JSONArray
+import org.json.JSONObject
+import java.lang.Exception
 
 class profile : AppCompatActivity() {
 
@@ -14,21 +19,37 @@ class profile : AppCompatActivity() {
 
         val bcreatePost = findViewById<Button>(R.id.createPost_button)
 
-        var miChallenges: ArrayList<technology> = ArrayList()
+        val miChallenges: ArrayList<technology> = ArrayList()
 
-        miChallenges.add(technology("Hola Mundo", "Hola mundo en C", R.drawable.c))
-        miChallenges.add(technology("Hola Mundo", "Hola mundo en Java", R.drawable.java))
-        miChallenges.add(technology("Hola Mundo", "Hola mundo en Ruby", R.drawable.ruby))
-        miChallenges.add(technology("Hola Mundo", "Hola mundo en Prolog", R.drawable.prolog))
 
-        val listChallenge = findViewById<ListView>(R.id.myChallengeList)
-        //val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, miChallenges)
-        val adapter = custumAdapter(this, miChallenges)
+        if(Network.vNetwork(this)) {
+            val params = LinkedHashMap<String,String>()
+            params["ID"] = 1.toString()
+            params["Owner"] = dataUser.getID().toString()
+            val jsonUser = JSONObject(params)
+            val jsonList =JSONArray()
+            jsonList.put(jsonUser)
+            Network.getJsonArray(this, "http://35.231.202.82:81/data", jsonList, Response.Listener<JSONArray>{
+                    response_Json ->
+                try {
+                    for (i in 0.. (response_Json.length() - 1)){
+                        Log.d("json", response_Json.toString())
+                        miChallenges.add(technology(response_Json.getJSONObject(i).getInt("ID"), response_Json.getJSONObject(i).getString("Title"), response_Json.getJSONObject(i).getString("Description"), dataUser.getDrawable(response_Json.getJSONObject(i).getInt("Technologie"))))
+                    }
+                    val listChallenge = findViewById<ListView>(R.id.myChallengeList)
+                    val adapter = custumAdapter(this, miChallenges)
 
-        listChallenge.adapter = adapter
+                    listChallenge.adapter = adapter
 
-        listChallenge.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-            Toast.makeText(this, miChallenges.get(position).title, Toast.LENGTH_LONG).show()
+                    listChallenge.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+                        Toast.makeText(this, miChallenges.get(position).id.toString(), Toast.LENGTH_LONG).show()
+                    }
+                }catch (e: Exception){
+                    Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                }
+            })
+        } else {
+
         }
 
         bcreatePost.setOnClickListener(View.OnClickListener{

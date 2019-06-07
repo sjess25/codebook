@@ -41,22 +41,21 @@ class login : AppCompatActivity() {
                             Network.getJson(this, "http://35.231.202.82:81/data", jsonKey, Response.Listener<JSONObject>{
                                     response_Json ->
                                 try {
-                                    Log.d("json enviado", jsonKey.toString())
                                     dataUser.setID(response_Json.get("ID").toString().toInt())
                                     dataUser.setName(response_Json.get("Name").toString())
-                                    dataUser.setTeacher(response_Json.get("Teacher").toString().toBoolean())
-                                    Toast.makeText(this, dataUser.getID().toString(), Toast.LENGTH_LONG).show()
+                                    if(response_Json.get("Teacher").toString().toInt() == 1){
+                                        dataUser.setTeacher(true)
+                                    }
                                     if (dataUser.getID() != -1){
                                         val intent = Intent(this, MainActivity::class.java)
                                         startActivity(intent)
                                     }
                                 }catch (e:Exception){
-                                    Toast.makeText(this, response_Json.toString(), Toast.LENGTH_SHORT).show()
-                                    val intent = Intent(this, MainActivity::class.java)
-                                    startActivity(intent)
+                                    Log.d("json login", response_Json.toString())
+                                    Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
                                 }
                             })
-                            startActivity(intent)
+                            //startActivity(intent)
                         } else if (response == "1") {
                             Toast.makeText(C, "Incorrect Password", Toast.LENGTH_SHORT).show()
 

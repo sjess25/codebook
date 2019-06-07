@@ -44,4 +44,15 @@ object dataUser {
     override fun toString(): String {
         return "ID:$id,NickName:$nickName,teacher:$teacher"
     }
+
+    fun getDrawable(tech: Int): Int {
+
+        when (tech) {
+            2 -> return R.drawable.c
+            6 -> return R.drawable.java
+            1 -> return R.drawable.ruby
+            5 -> return R.drawable.prolog
+        }
+        return -1
+    }
 }

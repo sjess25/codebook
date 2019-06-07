@@ -12,11 +12,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bProfile = findViewById<ImageButton>(R.id.vw_profiles)
 
-        bProfile.setOnClickListener( View.OnClickListener {
-            val intent = Intent(this, profile::class.java)
-            startActivity(intent)
-        } )
+        if(dataUser.getTeacher()){
+            val bProfile = findViewById<ImageButton>(R.id.vw_profiles)
+
+            bProfile.setOnClickListener( View.OnClickListener {
+                val intent = Intent(this, profile::class.java)
+                startActivity(intent)
+            } )
+        }
     }
 }
