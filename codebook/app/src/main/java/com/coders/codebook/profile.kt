@@ -49,10 +49,11 @@ class profile : AppCompatActivity() {
                 }
             })
         } else {
-
+            Toast.makeText(this, "Sin conexion", Toast.LENGTH_LONG).show()
         }
 
         bcreatePost.setOnClickListener(View.OnClickListener{
+            (this as profile).finish()
             val intentCreatePost = Intent(this, CreatePost::class.java)
             startActivity(intentCreatePost)
         })

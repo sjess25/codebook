@@ -55,4 +55,15 @@ object dataUser {
         }
         return -1
     }
+
+    fun getIDTechnology(name: String): Int {
+
+        when (name) {
+            "C" -> return 2
+            "Java" -> return 6
+            "Ruby" -> return 1
+            "Prolog" -> return 5
+        }
+        return -1
+    }
 }

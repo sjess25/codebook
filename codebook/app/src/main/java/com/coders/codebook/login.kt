@@ -77,6 +77,7 @@ class login : AppCompatActivity() {
         } )
 
         bsignup.setOnClickListener(View.OnClickListener {
+            (this as login).finish()
             val intent = Intent(this, signup::class.java)
             startActivity(intent)
         })
