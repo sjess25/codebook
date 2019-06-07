@@ -23,12 +23,13 @@
                 android:layout_height="wrap_content" android:id="@+id/user_nickname" android:layout_weight="12"
                 style="@style/Widget.AppCompat.Button.Borderless" android:textAlignment="textStart"
                 android:textStyle="bold|italic" android:textSize="18sp"
-                android:textColor="@color/design_default_color_primary_dark"/>
+                android:textColor="@color/colorBgUAMC"/>
         <Button
-                android:text="@string/follow_label"
+                android:text="@string/acceptChallenge"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/follow_button" android:layout_weight=".1"
-                style="@style/Widget.AppCompat.Button.Borderless" android:textColor="@color/colorBgUAMC"/>
+                android:layout_height="wrap_content" android:layout_weight=".1"
+                style="@style/Widget.AppCompat.Button.Borderless" android:textColor="@color/colorBgUAMC"
+                android:id="@+id/acceptChallenge_button"/>
     </LinearLayout>
     <ScrollView
             android:layout_width="match_parent"
@@ -62,28 +63,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/interaction_layout">
                 <Button
-                        android:text="@string/acceptChallenge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/accept_Challenge"
-                        android:layout_weight="8"
-                        style="@style/Widget.AppCompat.Button.Borderless" android:textColor="@color/colorBgUAMC"
-                        android:background="@android:color/holo_red_dark" android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"/>
-                <Button
                         android:text="@string/like_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/like_button" android:layout_weight="1"
-                        style="Widget.AppCompat.Button.Borderless" android:background="@android:color/holo_green_dark"
-                        android:textColor="@color/colorBgUAMC"
+                        style="@style/Widget.AppCompat.Button" android:background="@color/colorBgUAMC"
+                        android:textColor="@color/blackUAMC"
                         android:layout_marginStart="5dp"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" android:id="@+id/textView4" android:layout_weight="1"/>
                 <Button
                         android:text="@string/dislike_label"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" android:id="@+id/dislike_button" android:layout_weight="1"
                         style="Widget.AppCompat.Button.Borderless"
-                        android:background="@color/design_default_color_primary_dark"
+                        android:background="@color/blackUAMC"
                         android:textColor="@color/colorBgUAMC"
                         android:layout_marginEnd="5dp"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" android:id="@+id/dislike_meter" android:layout_weight="1"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"
