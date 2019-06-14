@@ -18,6 +18,7 @@ class profile : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
 
         val bcreatePost = findViewById<Button>(R.id.createPost_button)
+        val beditProfile = findViewById<ImageButton>(R.id.vw_profiles)
 
         val miChallenges: ArrayList<technology> = ArrayList()
 
@@ -56,6 +57,12 @@ class profile : AppCompatActivity() {
             (this as profile).finish()
             val intentCreatePost = Intent(this, CreatePost::class.java)
             startActivity(intentCreatePost)
+        })
+
+        beditProfile.setOnClickListener(View.OnClickListener {
+            (this as profile).finish()
+            val intentEditProfile = Intent(this, EditProfile::class.java)
+            startActivity(intentEditProfile)
         })
     }
 }

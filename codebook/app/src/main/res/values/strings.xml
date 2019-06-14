@@ -3,18 +3,29 @@
     <string name="welcome_text">Welcome!</string>
     <string name="signup_instructions">Please sign up below</string>
     <string name="header_toolbar">Nuevo reto</string>
-    /*Strings for actions*/
+    /*Labels for actions*/
     <string name="back_label">X</string>
     <string name="post_label">Publicar</string>
     <string name="next_label">Siguiente</string>
-    /*Strings for languages*/
+    <string name="acceptChallenge">Aceptar Desafio</string>
+    <string name="like_label">Me gusta</string>
+    <string name="dislike_label">No me gusta</string>
+    <string name="saveChanges_label">Guardar</string>
+    <string name="changeProfilePhoto_label">Cambiar foto</string>
+    /*Label for description items*/
+    <string name="name_label">Nombre</string>
+    <string name="userName_label">NickName</string>
+    <string name="email_label">Correo</string>
+    <string name="password_label">Contraseña</string>
+    <string name="empty"> </string>
+    /*Languages*/
     <string name="c_label">C</string>
     <string name="java_label">Java</string>
     <string name="prolog_label">Prolog</string>
     <string name="ruby_label">Ruby</string>
     <string name="python_label">Python</string>
     <string name="javascript_label">JavaScript</string>
-    /*difficulty levels*/
+    /*Difficulty levels*/
     <string name="lvl1_label">1</string>
     <string name="lvl2_label">2</string>
     <string name="lvl3_label">3</string>
@@ -27,7 +38,8 @@
     <string name="time4_label">7</string>
     /*Notices*/
     <string name="warning_bibliography">*Puedes agregar enlaces a bibliografia, documentos o informacion que pueden ser
-        de ayuda para quien tome el reto</string>
+        de ayuda para quien tome el reto
+    </string>
     <string name="hint_url">https://</string>
     <string name="warning_post_solution">*Para publicar tu reto debes de conocer la solucion</string>
     <string name="hint_solution_techer">Por favor ingrese la solucion aqui...</string>
@@ -37,8 +49,7 @@
     <string name="unfollow_label">Dejar de seguir</string>
     <string name="likeMeter_label">0</string>
     <string name="dislikeMeter_label">0</string>
-    /*interactions labels*/
-    <string name="acceptChallenge">Aceptar Desafio</string>
-    <string name="like_label">Me gusta</string>
-    <string name="dislike_label">No me gusta</string>
+    /*activity labels*/
+    <string name="editProfile_label">Editar perfil</string>
+
 </resources>

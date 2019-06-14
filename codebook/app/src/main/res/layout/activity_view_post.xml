@@ -21,9 +21,9 @@
                 android:text="@string/nickname_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/user_nickname" android:layout_weight="12"
-                style="@style/Widget.AppCompat.Button.Borderless" android:textAlignment="textStart"
+                style="@style/Widget.AppCompat.Button.Borderless" android:textAlignment="viewStart"
                 android:textStyle="bold|italic" android:textSize="18sp"
-                android:textColor="@color/colorBgUAMC"/>
+                android:textColor="@color/colorBgUAMC" android:textAllCaps="false"/>
         <Button
                 android:text="@string/acceptChallenge"
                 android:layout_width="wrap_content"
@@ -74,7 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" android:id="@+id/like_meter" android:layout_weight="1"
                         android:textAlignment="center"
-                        android:gravity="center"/>
+                        android:gravity="center" android:layout_marginEnd="5dp"/>
                 <Button
                         android:text="@string/dislike_label"
                         android:layout_width="wrap_content"
@@ -82,13 +82,13 @@
                         style="Widget.AppCompat.Button.Borderless"
                         android:background="@color/blackUAMC"
                         android:textColor="@color/colorBgUAMC"
-                        android:layout_marginEnd="5dp"/>
+                />
                 <TextView
                         android:text="@string/dislikeMeter_label"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" android:id="@+id/dislike_meter" android:layout_weight="1"
                         android:textAlignment="center"
-                        android:gravity="center"/>
+                        android:gravity="center" android:layout_marginEnd="5dp"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"

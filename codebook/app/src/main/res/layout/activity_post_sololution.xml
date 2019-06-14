@@ -17,10 +17,10 @@
                 android:layout_height="wrap_content" android:id="@+id/back_button" android:layout_weight=".1"
                 style="@style/Widget.AppCompat.Button.Borderless" android:textColor="@color/colorBgUAMC"/>
         <TextView
-                android:text="Titulo del reto"
+                android:text="Solucion del reto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/ChallengeTittle_text" android:layout_weight="12"
-                android:textColor="@color/colorBgUAMC" android:textSize="28sp" android:textStyle="bold|italic"/>
+                android:textColor="@color/colorBgUAMC" android:textSize="24sp" android:textStyle="bold|italic"/>
         <Button
                 android:text="@string/post_label"
                 android:layout_width="wrap_content"
