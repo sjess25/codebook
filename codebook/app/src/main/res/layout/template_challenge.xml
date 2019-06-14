@@ -3,27 +3,33 @@
               xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent" android:background="@color/trueWhite">
-    <LinearLayout
-            android:orientation="horizontal"
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:background="@color/colorBgUAMC">
-        <ImageView
-                android:layout_width="110dp"
-                android:layout_height="80dp" app:srcCompat="@drawable/c" android:id="@+id/imageTec"
-                android:layout_weight="1" android:layout_margin="5dp"/>
+            android:layout_height="match_parent">
         <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_weight="1" android:background="@color/colorBgUAMC">
-            <TextView
-                    android:text="TextView"
+                android:layout_height="wrap_content" android:background="@color/colorBgUAMC">
+            <ImageView
+                    android:layout_width="110dp"
+                    android:layout_height="80dp" app:srcCompat="@drawable/c" android:id="@+id/imageTec"
+                    android:layout_weight="1" android:layout_margin="5dp"/>
+            <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/titleChallenge" android:layout_margin="10dp"/>
-            <TextView
-                    android:text="TextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/descriptionChallenge"
-                    android:layout_margin="10dp"/>
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:background="@color/colorBgUAMC">
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/titleChallenge"
+                        android:layout_margin="10dp"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/descriptionChallenge"
+                        android:layout_margin="10dp"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </LinearLayout>
