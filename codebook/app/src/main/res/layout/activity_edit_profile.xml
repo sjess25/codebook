@@ -36,14 +36,9 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/child_scrollView">
-            <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" tools:srcCompat="@tools:sample/avatars[14]"
-                    android:id="@+id/user_photo" android:layout_gravity="center"/>
-            <Button
-                    android:text="@string/changeProfilePhoto_label"
+            <ImageButton
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/changeProfilePhoto"
+                    android:layout_height="wrap_content" app:srcCompat="@mipmap/f_icon" android:id="@+id/imageButton2"
                     android:layout_gravity="center"/>
             <TextView
                     android:layout_width="match_parent"
@@ -72,19 +67,29 @@
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:inputType="textEmailAddress"
                     android:ems="10"
                     android:id="@+id/email_editText"/>
             <TextView
-                    android:text="@string/password_label"
+                    android:text="@string/oldPassword_label"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/password_label"/>
+                    android:layout_height="wrap_content" android:id="@+id/oldPassword_label"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:inputType="textPassword"
                     android:ems="10"
-                    android:id="@+id/password_editText"/>
+                    android:id="@+id/oldPassword_editText"/>
+            <TextView
+                    android:text="@string/newPassword_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/newPassword_label"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:id="@+id/newPassword_editText"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
