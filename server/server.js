@@ -64,6 +64,30 @@ server.post('/data', function (req, res) {
         res.send(ans);
       });
       break;
+    
+    case 3: // specific basic info challenge
+      var x = req.body.Challenge;
+      requests.getBasicChallenge(x, function (ans) {
+        console.log(JSON.stringify(ans, 2) + '\n\n');
+        res.send(ans);
+      });
+      break;
+    
+    case 4: // active challenges per user
+      var usr = req.body.Owner;
+      requests.listActiveChallenges(usr, function (ans) {
+        console.log(JSON.stringify(ans, 2) + '\n\n');
+        res.send(ans);
+      });
+      break;
+
+    case 5: // finished challenges per technology
+      var tec = req.body.Tecnologie;
+      requests.listTecChallenges(tec, function (ans) {
+        console.log(JSON.stringify(ans, 2) + '\n\n');
+        res.send(ans);
+      });
+      break;
   
     default:
       res.send({

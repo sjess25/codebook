@@ -103,6 +103,7 @@ module.exports = {
         });
     },
 
+    // List user challenges, no time limit.
     listChallenges: function (owner, callback) {
         var result = [];
         var sql = `SELECT * FROM ChallengeTechnologies ct,
@@ -149,6 +150,108 @@ module.exports = {
         });
     },
 
+    // List user challenges, time limit only active.
+    listActiveChallenges: function (owner, callback) {
+        var result = [];
+        var sql = `SELECT * FROM ChallengeTechnologies ct,
+                        (SELECT ID AS cID, Title, Description, Owner, Creation, TimeLimit,
+                        (DATEDIFF(NOW(), DATE_ADD(Creation, INTERVAL TimeLimit DAY))) as Diff
+                        FROM Challenges WHERE Owner = "${owner}") AS c
+                        WHERE ct.Challenge = c.cID
+                        ORDER BY c.Creation DESC;`;
+
+        console.log(`Lista de retos solicitada.\n${sql}\n`);
+
+        sqlQuery(sql, function (error, results, fields) {
+            if (error) {
+                console.error(error);
+                callback({
+                    status: 'error',
+                    data: error
+                });
+            } else {
+                if (results) {
+                    if (results.length > 0) {
+                        results.forEach(element => {
+                            if (element.Diff <= 0) {
+                                result.push({
+                                    ID: element.cID,
+                                    Title: element.Title,
+                                    Description: element.Description,
+                                    Technologie: element.Technologie
+                                })
+                            }
+                        });
+
+                        callback(result);
+                    } else {
+                        callback({
+                            status: 'error',
+                            data: 'No challenges found.'
+                        });
+                    }
+                } else {
+                    callback({
+                        status: 'error',
+                        data: 'No challenges found.'
+                    });
+                }
+            }
+        });
+    },
+
+    // List technology specific challenges.
+    listTecChallenges: function (tid, callback) {
+        var result = [];
+        var sql = `SELECT * FROM ChallengeTechnologies ct,
+                        (SELECT ID AS cID, Title, Description, Owner, Creation, TimeLimit,
+                        (DATEDIFF(NOW(), DATE_ADD(Creation, INTERVAL TimeLimit DAY))) as Diff
+                        FROM Challenges) AS c
+                        WHERE ct.Challenge = c.cID,
+                        AND Tecnologie = "${tid}"
+                        ORDER BY c.Creation DESC;`;
+
+        console.log(`Lista de retos solicitada.\n${sql}\n`);
+
+        sqlQuery(sql, function (error, results, fields) {
+            if (error) {
+                console.error(error);
+                callback({
+                    status: 'error',
+                    data: error
+                });
+            } else {
+                if (results) {
+                    if (results.length > 0) {
+                        results.forEach(element => {
+                            if (element.Diff > 0) {
+                                result.push({
+                                    ID: element.cID,
+                                    Title: element.Title,
+                                    Description: element.Description,
+                                    Technologie: element.Technologie
+                                })
+                            }
+                        });
+
+                        callback(result);
+                    } else {
+                        callback({
+                            status: 'error',
+                            data: 'No challenges found.'
+                        });
+                    }
+                } else {
+                    callback({
+                        status: 'error',
+                        data: 'No challenges found.'
+                    });
+                }
+            }
+        });
+    },
+
+    // full challenge information
     getChallenge: function (ID, callback) {
         var sql = `SELECT * FROM ChallengeAnswers ca,
                         (SELECT ID AS ChallengeID,
@@ -194,6 +297,55 @@ module.exports = {
                             Challenge: challengeInfo,
                             Answers: answers
                         });
+                    } else {
+                        callback({
+                            status: 'error',
+                            data: 'No challenges found.'
+                        });
+                    }
+                } else {
+                    callback({
+                        status: 'error',
+                        data: 'No challenges found.'
+                    });
+                }
+            }
+        });
+    },
+
+    // Basic challenge information
+    getBasicChallenge: function (ID, callback) {
+        var sql = `SELECT ID AS ChallengeID,
+                        Title, Description, Creation, Difficulty, TimeLimit,
+                        Ref1, Ref2, Ref3
+                    FROM Challenges WHERE ID = "${ID}"
+                    ORDER BY Creation DESC;`;
+
+        console.log(`Información básica de reto solicitada.\n${sql}\n`);
+
+        sqlQuery(sql, function (error, results, fields) {
+            if (error) {
+                console.error(error);
+                callback({
+                    status: 'error',
+                    data: error
+                });
+            } else {
+                if (results) {
+                    if (results.length > 0) {
+                        var challengeInfo = {
+                            ID: results[0].ChallengeID,
+                            Title: results[0].Title,
+                            Description: results[0].Description,
+                            Creation: results[0].Creation,
+                            Difficulty: results[0].Difficulty,
+                            TimeLimit: results[0].TimeLimit,
+                            Ref1: results[0].Ref1,
+                            Ref2: results[0].Ref2,
+                            Ref3: results[0].Ref3
+                        };
+
+                        callback(challengeInfo);
                     } else {
                         callback({
                             status: 'error',
