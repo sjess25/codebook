@@ -100,7 +100,7 @@ server.post('/data', function (req, res) {
       break;
 
     case 6: // finished challenges per technology
-      var tec = req.body.Tecnologie;
+      var tec = req.body.Technologie;
       var who = req.body.Who;
       requests.inactiveSubscribed(usr, tec, function (ans) {
         console.log(JSON.stringify(ans, 2) + '\n\n');
