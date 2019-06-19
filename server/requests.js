@@ -77,6 +77,7 @@ module.exports = {
     register: function (nick, mail, pass, name, callback) {
         var sql = `INSERT INTO Users (NickName, Email, Password, Name)
               VALUES ("${nick}", "${mail}", "${pass}", "${name}");`;
+        var sql2 = ''; // Add SQL query to include default registration challenge.
 
         console.log(`Registrando usuario.\n${sql}\n`);
 
@@ -102,8 +103,12 @@ module.exports = {
             }
         });
     },
+    
+    // List user subscribed active challenges.
+    
+    // List user subscribed unactive challenges per technology.
 
-    // List user challenges, no time limit.
+    // List user owned challenges.
     listChallenges: function (owner, callback) {
         var result = [];
         var sql = `SELECT * FROM ChallengeTechnologies ct,
@@ -150,7 +155,8 @@ module.exports = {
         });
     },
 
-    // List user challenges, time limit only active.
+    // List user owned challenges, time limit only active.
+    // --> Wrong use of function. DO NOT USE.
     listActiveChallenges: function (owner, callback) {
         var result = [];
         var sql = `SELECT * FROM ChallengeTechnologies ct,
@@ -158,6 +164,7 @@ module.exports = {
                         (DATEDIFF(NOW(), DATE_ADD(Creation, INTERVAL TimeLimit DAY))) as Diff
                         FROM Challenges WHERE Owner = "${owner}") AS c
                         WHERE ct.Challenge = c.cID
+                        AND Diff <= 0
                         ORDER BY c.Creation DESC;`;
 
         console.log(`Lista de retos solicitada.\n${sql}\n`);
@@ -201,6 +208,7 @@ module.exports = {
     },
 
     // List technology specific challenges.
+    // --> Wrong use of function. DO NOT USE.
     listTecChallenges: function (tid, callback) {
         var result = [];
         var sql = `SELECT * FROM ChallengeTechnologies ct,
@@ -256,7 +264,7 @@ module.exports = {
         var sql = `SELECT * FROM ChallengeAnswers ca,
                         (SELECT ID AS ChallengeID,
                         Title, Description, Creation, Difficulty, TimeLimit,
-                        Ref1, Ref2, Ref3
+                        Ref1, Ref2, Ref3, Owner as ChallengeOwner
                         FROM Challenges WHERE ID = "${ID}")
                     AS c WHERE ca.Challenge = c.ChallengeID
                     ORDER BY c.Creation DESC;`;
@@ -284,18 +292,30 @@ module.exports = {
                             Ref2: results[0].Ref2,
                             Ref3: results[0].Ref3
                         }
+                        
+                        // --->> Added challenge owner answer distinction.
                         var answers = [];
+                        var oanswer = {};
                         results.forEach(element => {
-                            answers.push({
-                                ID: element.ID,
-                                Owner: element.Owner,
-                                Description: element.Answer
-                            })
+                            if (element.Owner == element.ChallengeOwner) {
+                                oanswer = {
+                                    ID: element.ID,
+                                    Owner: element.Owner,
+                                    Description: element.Answer
+                                };
+                            } else {
+                                answers.push({
+                                    ID: element.ID,
+                                    Owner: element.Owner,
+                                    Description: element.Answer
+                                });
+                            }
                         });
 
                         callback({
                             Challenge: challengeInfo,
-                            Answers: answers
+                            Answers: answers,
+                            OwnerAnswer: 
                         });
                     } else {
                         callback({
