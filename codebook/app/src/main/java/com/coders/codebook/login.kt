@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.android.volley.Response
+import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
 
@@ -47,8 +48,23 @@ class login : AppCompatActivity() {
                                         dataUser.setTeacher(true)
                                     }
                                     if (dataUser.getID() != -1){
-                                        val intent = Intent(this, MainActivity::class.java)
-                                        startActivity(intent)
+                                        val paramsArray = LinkedHashMap<String,String>()
+                                        paramsArray["ID"] = 5.toString()
+                                        paramsArray["Who"] = dataUser.getID().toString()
+                                        val jsonChallenge = JSONObject(paramsArray)
+                                        val jsonKeyAChallenge = JSONArray()
+                                        jsonKeyAChallenge.put(jsonChallenge)
+
+                                        Network.getJsonArray(this, "http://35.231.202.82:81/data", jsonKeyAChallenge, Response.Listener<JSONArray>{
+                                                response_Array ->
+                                            try {
+                                                Log.d("json active challenge", response_Array.toString())
+                                                val intent = Intent(this, MainActivity::class.java)
+                                                startActivity(intent)
+                                            } catch (e:Exception) {
+                                                Log.d("json active challenge", response_Array.toString())
+                                            }
+                                        })
                                     }
                                 }catch (e:Exception){
                                     Log.d("json login", response_Json.toString())

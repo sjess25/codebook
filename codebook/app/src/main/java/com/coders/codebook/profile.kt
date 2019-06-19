@@ -20,38 +20,12 @@ class profile : AppCompatActivity() {
         val bcreatePost = findViewById<Button>(R.id.createPost_button)
         val beditProfile = findViewById<ImageButton>(R.id.vw_profiles)
 
-        val miChallenges: ArrayList<technology> = ArrayList()
 
+        val listChallenge = findViewById<ListView>(R.id.myChallengeList)
+        val adapter = custumAdapter(this, listChallenges.getList())
+        listChallenge.adapter = adapter
 
-        if(Network.vNetwork(this)) {
-            val params = LinkedHashMap<String,String>()
-            params["ID"] = 1.toString()
-            params["Owner"] = dataUser.getID().toString()
-            val jsonUser = JSONObject(params)
-            val jsonList =JSONArray()
-            jsonList.put(jsonUser)
-            Network.getJsonArray(this, "http://35.231.202.82:81/data", jsonList, Response.Listener<JSONArray>{
-                    response_Json ->
-                try {
-                    for (i in 0.. (response_Json.length() - 1)){
-                        Log.d("json", response_Json.toString())
-                        miChallenges.add(technology(response_Json.getJSONObject(i).getInt("ID"), response_Json.getJSONObject(i).getString("Title"), response_Json.getJSONObject(i).getString("Description"), dataUser.getDrawable(response_Json.getJSONObject(i).getInt("Technologie"))))
-                    }
-                    val listChallenge = findViewById<ListView>(R.id.myChallengeList)
-                    val adapter = custumAdapter(this, miChallenges)
-
-                    listChallenge.adapter = adapter
-
-                    listChallenge.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-                        Toast.makeText(this, miChallenges.get(position).id.toString(), Toast.LENGTH_LONG).show()
-                    }
-                }catch (e: Exception){
-                    Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
-                }
-            })
-        } else {
-            Toast.makeText(this, "Sin conexion", Toast.LENGTH_LONG).show()
-        }
+        Log.d("list challenge", "profile")
 
         bcreatePost.setOnClickListener(View.OnClickListener{
             (this as profile).finish()
@@ -64,5 +38,27 @@ class profile : AppCompatActivity() {
             val intentEditProfile = Intent(this, EditProfile::class.java)
             startActivity(intentEditProfile)
         })
+
+        listChallenge.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+            //Toast.makeText(this, listChallenges.getList()[position].title, Toast.LENGTH_LONG).show()
+            if(Network.vNetwork(this)) {
+                val params = LinkedHashMap<String,String>()
+                params["ID"] = 4.toString()
+                params["Challenge"] = listChallenges.getList()[position].id.toString()
+                val jsonUser = JSONObject(params)
+
+                Network.getJson(this, "http://35.231.202.82:81/data", jsonUser, Response.Listener<JSONObject>{
+                        response_Json ->
+                    try {
+                        Log.d("select challenge", jsonUser.toString())
+                        Log.d("response challenge", response_Json.toString())
+                    }catch (e: Exception){
+                        Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                    }
+                })
+            } else {
+                Toast.makeText(this, "Sin conexion", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 }
