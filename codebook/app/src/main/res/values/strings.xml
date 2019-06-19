@@ -12,6 +12,7 @@
     <string name="dislike_label">No me gusta</string>
     <string name="saveChanges_label">Guardar</string>
     <string name="changeProfilePhoto_label">Cambiar foto</string>
+    <string name="createChallengue_label">Crear Desafio</string>
     /*Label for description items*/
     <string name="name_label">Nombre</string>
     <string name="userName_label">NickName</string>

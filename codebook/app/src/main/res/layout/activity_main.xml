@@ -44,19 +44,23 @@
             <ImageButton
                     android:layout_width="80dp"
                     android:layout_height="80dp" app:srcCompat="@drawable/c" android:id="@+id/c_challenges"
-                    android:layout_weight="1" android:scaleType="centerCrop"/>
+                    android:layout_weight="1" android:scaleType="centerCrop"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
             <ImageButton
                     android:layout_width="80dp"
                     android:layout_height="80dp" app:srcCompat="@drawable/java" android:id="@+id/java_challenges"
-                    android:layout_weight="1" android:scaleType="centerCrop"/>
+                    android:layout_weight="1" android:scaleType="centerCrop"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
             <ImageButton
                     android:layout_width="80dp"
                     android:layout_height="80dp" app:srcCompat="@drawable/prolog" android:id="@+id/prolog_challenges"
-                    android:layout_weight="1" android:scaleType="centerCrop"/>
+                    android:layout_weight="1" android:scaleType="centerCrop"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
             <ImageButton
                     android:layout_width="80dp"
                     android:layout_height="80dp" app:srcCompat="@drawable/ruby" android:id="@+id/ruby_challenges"
-                    android:layout_weight="1" android:scaleType="centerCrop"/>
+                    android:layout_weight="1" android:scaleType="centerCrop"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
         </LinearLayout>
     </HorizontalScrollView>
     <TextView

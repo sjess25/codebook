@@ -18,6 +18,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        /*Botones para el intent de my challengue*/
+        val bChallengeC      = findViewById<ImageButton>(R.id.c_challenges)
+        val bChallengeJava   = findViewById<ImageButton>(R.id.java_challenges)
+        val bChallengeProlog = findViewById<ImageButton>(R.id.prolog_challenges)
+        val bChallengeRuby   = findViewById<ImageButton>(R.id.ruby_challenges)
+
 
         if(dataUser.getTeacher()){
 
@@ -59,6 +65,23 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, EditProfile::class.java)
                 startActivity(intent)
             } )
+
+            bChallengeC.setOnClickListener(View.OnClickListener {
+                val intentC = Intent(this, myChallenge::class.java)
+                startActivity(intentC)
+            })
+            bChallengeJava.setOnClickListener(View.OnClickListener {
+                val intentJava = Intent(this, myChallenge::class.java)
+                startActivity(intentJava)
+            })
+            bChallengeProlog.setOnClickListener(View.OnClickListener {
+                val intentProlog = Intent(this, myChallenge::class.java)
+                startActivity(intentProlog)
+            })
+            bChallengeRuby.setOnClickListener(View.OnClickListener {
+                val intentRuby = Intent(this, myChallenge::class.java)
+                startActivity(intentRuby)
+            })
         }
     }
 }
