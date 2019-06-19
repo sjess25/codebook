@@ -360,5 +360,96 @@ module.exports = {
                 }
             }
         });
+    },
+    
+    // post a challenge
+    postChallenge: function (tec, tit, des, dif, til, own, ans, rf1, rf2, rf3, callback) {
+        var sql = `INSERT INTO Challenges (Title, Description, Difficulty, TimeLimit, Owner, Ref1, Ref2, Ref3)
+                    VALUES ("${tit}", "${des}", "${dif}", "${til}", "${own}", "${rf1}", "${rf2}", "${rf3}");`;
+
+        console.log(`Publicación de reto solicitada.\n${sql}\n`);
+
+        sqlQuery(sql, function (error, results, fields) {
+            if (error) {
+                console.error(error);
+                callback({
+                    cID: -1,
+                    aID: -1
+                });
+            } else {
+                if (results) {
+                    if (results.insertId > 0) {
+                        var sql2 = `INSERT INTO ChallengeTechnologies (Technologie, Challenge)
+                        VALUES ("${tec}", "${results.insertId}");`;
+                        var sql3 = `INSERT INTO ChallengeAnswers (Owner, Answer, Challenge)
+                        VALUES ("${own}", "${ans}", "${results.insertId}");`;
+                        console.log(sql2 + '\n\n');
+                        console.log(sql3 + '\n\n');
+                        sqlQuery(sql2, function (errort, resultst, fieldst) {
+                            if (errort) {
+                                console.error(errort);
+                                callback({
+                                    cID: -1,
+                                    aID: -1
+                                });
+                            } else {
+                                if (resultst) {
+                                    if (resultst.insertId > 0) {
+                                        sqlQuery(sql3, function (errora, resultsa, fieldsa) {
+                                            if (errora) {
+                                                console.error(errora);
+                                                callback({
+                                                    cID: -1,
+                                                    aID: -1
+                                                });
+                                            } else {
+                                                if (resultsa) {
+                                                    if (resultsa.insertId > 0) {
+                                                        callback({
+                                                            cID: results.insertId,
+                                                            aID: resultst.insertId
+                                                        });
+                                                    } else {
+                                                        callback({
+                                                            cID: -1,
+                                                            aID: -1
+                                                        });
+                                                    }
+                                                } else {
+                                                    callback({
+                                                        cID: -1,
+                                                        aID: -1
+                                                    });
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        callback({
+                                            cID: -1,
+                                            aID: -1
+                                        });
+                                    }
+                                } else {
+                                    callback({
+                                        cID: -1,
+                                        aID: -1
+                                    });
+                                }
+                            }
+                        });
+                    } else {
+                        callback({
+                            cID: -1,
+                            aID: -1
+                        });
+                    }
+                } else {
+                    callback({
+                        cID: -1,
+                        aID: -1
+                    });
+                }
+            }
+        });
     }
 }
