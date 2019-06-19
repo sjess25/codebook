@@ -44,7 +44,7 @@
     <string name="hint_url">https://</string>
     <string name="warning_post_solution">*Para publicar tu reto debes de conocer la solucion</string>
     <string name="hint_solution_techer">Por favor ingrese la solucion aqui...</string>
-    <string name="hint_searchViewer">Buscar reto</string>
+    <string name="hint_searchViewer">Buscar reto...</string>
     /*Variables? aun no se como se usan*/
     <string name="nickname_label">"@Usuario"</string>
     <string name="follow_label">Seguir</string>
@@ -53,6 +53,6 @@
     <string name="dislikeMeter_label">0</string>
     /*activity labels*/
     <string name="editProfile_label">Editar perfil</string>
-    <string name="searchview_label">Buscador</string>
+    <string name="searchview_label">Buscar</string>
 
 </resources>
