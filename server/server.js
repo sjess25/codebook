@@ -92,8 +92,8 @@ server.post('/data', function (req, res) {
       break;
     
     case 5: // active challenges per user
-      var usr = req.body.Owner;
-      requests.listActiveChallenges(usr, function (ans) {
+      var usr = req.body.Who;
+      requests.activeSubscribed(usr, function (ans) {
         console.log(JSON.stringify(ans, 2) + '\n\n');
         res.send(ans);
       });
@@ -101,7 +101,8 @@ server.post('/data', function (req, res) {
 
     case 6: // finished challenges per technology
       var tec = req.body.Tecnologie;
-      requests.listTecChallenges(tec, function (ans) {
+      var who = req.body.Who;
+      requests.inactiveSubscribed(usr, tec, function (ans) {
         console.log(JSON.stringify(ans, 2) + '\n\n');
         res.send(ans);
       });
