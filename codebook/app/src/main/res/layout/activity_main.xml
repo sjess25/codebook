@@ -35,20 +35,32 @@
             android:background="@color/blackUAMC"
             android:textColor="#FFFFFF" android:textSize="30sp"/>
     <HorizontalScrollView
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content" android:background="#00C7BFBF">
         <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_gravity="center">
             <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" app:srcCompat="@mipmap/lenguaje_c"
-                    android:id="@+id/challenge_C" android:layout_weight="1"/>
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" app:srcCompat="@drawable/c" android:id="@+id/c_challenges"
+                    android:layout_weight="1" android:scaleType="centerCrop"/>
+            <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" app:srcCompat="@drawable/java" android:id="@+id/java_challenges"
+                    android:layout_weight="1" android:scaleType="centerCrop"/>
+            <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" app:srcCompat="@drawable/prolog" android:id="@+id/prolog_challenges"
+                    android:layout_weight="1" android:scaleType="centerCrop"/>
+            <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" app:srcCompat="@drawable/ruby" android:id="@+id/ruby_challenges"
+                    android:layout_weight="1" android:scaleType="centerCrop"/>
         </LinearLayout>
     </HorizontalScrollView>
     <TextView
-            android:text="Noticias"
+            android:text="Nuevos retos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/textView5" android:background="@color/blackUAMC"
             android:textSize="30sp" android:textColor="#FFFFFF"/>

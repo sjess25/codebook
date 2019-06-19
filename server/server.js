@@ -64,6 +64,49 @@ server.post('/data', function (req, res) {
         res.send(ans);
       });
       break;
+      
+    case 3: // post a challenge
+      var tec = req.body.Technologie;
+      var tit = req.body.Title;
+      var des = req.body.Description;
+      var dif = req.body.Difficulty;
+      var til = req.body.TimeLimit;
+      var own = req.body.Owner;
+      var ans = req.body.Answer;
+      var rf1 = req.body.ref1;
+      var rf2 = req.body.ref2;
+      var rf3 = req.body.ref3;
+
+      requests.postChallenge(tec, tit, des, dif, til, own, ans, rf1, rf2, rf3, function (ans) {
+        console.log(JSON.stringify(ans, 2) + '\n\n');
+        res.send(ans);
+      });
+      break;
+    
+    case 4: // specific basic info challenge
+      var x = req.body.Challenge;
+      requests.getBasicChallenge(x, function (ans) {
+        console.log(JSON.stringify(ans, 2) + '\n\n');
+        res.send(ans);
+      });
+      break;
+    
+    case 5: // active challenges per user
+      var usr = req.body.Who;
+      requests.activeSubscribed(usr, function (ans) {
+        console.log(JSON.stringify(ans, 2) + '\n\n');
+        res.send(ans);
+      });
+      break;
+
+    case 6: // finished challenges per technology
+      var tec = req.body.Technologie;
+      var who = req.body.Who;
+      requests.inactiveSubscribed(usr, tec, function (ans) {
+        console.log(JSON.stringify(ans, 2) + '\n\n');
+        res.send(ans);
+      });
+      break;
   
     default:
       res.send({
