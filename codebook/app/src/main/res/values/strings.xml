@@ -55,5 +55,6 @@
     /*activity labels*/
     <string name="editProfile_label">Editar perfil</string>
     <string name="searchview_label">Buscar</string>
+    <string name="myChallenges_label">Mis desafios</string>
 
 </resources>
