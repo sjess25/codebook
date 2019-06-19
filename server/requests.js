@@ -77,7 +77,7 @@ module.exports = {
     register: function (nick, mail, pass, name, callback) {
         var sql = `INSERT INTO Users (NickName, Email, Password, Name)
               VALUES ("${nick}", "${mail}", "${pass}", "${name}");`;
-        var sql2 = ''; // Add SQL query to include default registration challenge.
+        // var sql2 = ''; // Add SQL query to include default registration challenge.
 
         console.log(`Registrando usuario.\n${sql}\n`);
 
@@ -105,9 +105,110 @@ module.exports = {
     },
     
     // List user subscribed active challenges.
-    
-    // List user subscribed unactive challenges per technology.
+    activeSubscribed: function (who, callback) {
+        var result = [];
+        var sql = `SELECT Who, Challenge, TakenAt,
+                    (DATEDIFF(NOW(), DATE_ADD(TakenAt, INTERVAL c.TimeLimit DAY))) as Diff
+                    FROM ChallengeSubscribers cs,
+                    (SELECT ID AS cID, Title, Description, Owner, Creation, TimeLimit
+                     FROM Challenges) AS c
+                    WHERE Who = "${who}"
+                    ORDER BY TakenAt DESC;`;
+        
+        console.log(`Lista de retos suscritos activos solicitada.\n${sql}\n`);
+        
+        sqlQuery(sql, function (error, results, fields) {
+            if (error) {
+                console.error(error);
+                callback([{
+                    status: 'error',
+                    data: error
+                }]);
+            } else {
+                if (results) {
+                    if (results.length > 0) {
+                        results.forEach(element => {
+                            if (element.Diff <= 0) {
+                                result.push({
+                                    ID: element.cID,
+                                    Title: element.Title,
+                                    Description: element.Description,
+                                    Technologie: element.Technologie
+                                });
+                            }
+                        });
 
+                        callback(result);
+                    } else {
+                        callback([{
+                            status: 'error',
+                            data: 'No challenges found.'
+                        }]);
+                    }
+                } else {
+                    callback([{
+                        status: 'error',
+                        data: 'No challenges found.'
+                    }]);
+                }
+            }
+        });
+    },
+    
+    // List user subscribed inactive challenges per technology.
+    inactiveSubscribed: function (who, tid, callback) {
+        var result = [];
+        var sql = `SELECT Who, Challenge, TakenAt,
+                    (DATEDIFF(NOW(), DATE_ADD(TakenAt, INTERVAL c.TimeLimit DAY))) as Diff
+                    FROM ChallengeSubscribers cs,
+                    (SELECT ID AS cID, Title, Description, Owner, Creation, TimeLimit
+                     FROM Challenges) AS c,
+                    (SELECT ID AS tID, Technologie, Challenge AS tChallenge
+                     FROM ChallengeTechnologies) AS t
+                    WHERE Who = "${who}"
+                    AND tChallenge = c.cID AND tID = "${tid}"
+                    ORDER BY TakenAt DESC;`;
+        
+        console.log(`Lista de retos suscritos inactivos solicitada.\n${sql}\n`);
+        
+        sqlQuery(sql, function (error, results, fields) {
+            if (error) {
+                console.error(error);
+                callback([{
+                    status: 'error',
+                    data: error
+                }]);
+            } else {
+                if (results) {
+                    if (results.length > 0) {
+                        results.forEach(element => {
+                            if (element.Diff > 0) {
+                                result.push({
+                                    ID: element.cID,
+                                    Title: element.Title,
+                                    Description: element.Description,
+                                    Technologie: element.Technologie
+                                });
+                            }
+                        });
+
+                        callback(result);
+                    } else {
+                        callback([{
+                            status: 'error',
+                            data: 'No challenges found.'
+                        }]);
+                    }
+                } else {
+                    callback([{
+                        status: 'error',
+                        data: 'No challenges found.'
+                    }]);
+                }
+            }
+        });
+    },
+    
     // List user owned challenges.
     listChallenges: function (owner, callback) {
         var result = [];
@@ -164,7 +265,6 @@ module.exports = {
                         (DATEDIFF(NOW(), DATE_ADD(Creation, INTERVAL TimeLimit DAY))) as Diff
                         FROM Challenges WHERE Owner = "${owner}") AS c
                         WHERE ct.Challenge = c.cID
-                        AND Diff <= 0
                         ORDER BY c.Creation DESC;`;
 
         console.log(`Lista de retos solicitada.\n${sql}\n`);
