@@ -391,7 +391,7 @@ module.exports = {
                             Ref1: results[0].Ref1,
                             Ref2: results[0].Ref2,
                             Ref3: results[0].Ref3
-                        }
+                        };
                         
                         // --->> Added challenge owner answer distinction.
                         var answers = [];
@@ -415,7 +415,7 @@ module.exports = {
                         callback({
                             Challenge: challengeInfo,
                             Answers: answers,
-                            OwnerAnswer: 
+                            OwnerAnswer: oanswer
                         });
                     } else {
                         callback({
