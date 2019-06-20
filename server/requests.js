@@ -107,12 +107,11 @@ module.exports = {
     // List user subscribed active challenges.
     activeSubscribed: function (who, callback) {
         var result = [];
-        var sql = `SELECT Who, Challenge, TakenAt,
-                    (DATEDIFF(NOW(), DATE_ADD(TakenAt, INTERVAL c.TimeLimit DAY))) as Diff
+        var sql = `SELECT *, (DATEDIFF(NOW(), DATE_ADD(TakenAt, INTERVAL c.TimeLimit DAY))) as Diff
                     FROM ChallengeSubscribers cs,
                     (SELECT ID AS cID, Title, Description, Owner, Creation, TimeLimit
                      FROM Challenges) AS c
-                    WHERE Who = "${who}"
+                    WHERE Who = "${who}" AND c.cID = cs.Challenge
                     ORDER BY TakenAt DESC;`;
         
         console.log(`Lista de retos suscritos activos solicitada.\n${sql}\n`);
@@ -158,8 +157,7 @@ module.exports = {
     // List user subscribed inactive challenges per technology.
     inactiveSubscribed: function (who, tid, callback) {
         var result = [];
-        var sql = `SELECT Who, Challenge, TakenAt,
-                    (DATEDIFF(NOW(), DATE_ADD(TakenAt, INTERVAL c.TimeLimit DAY))) as Diff
+        var sql = `SELECT *, (DATEDIFF(NOW(), DATE_ADD(TakenAt, INTERVAL c.TimeLimit DAY))) as Diff
                     FROM ChallengeSubscribers cs,
                     (SELECT ID AS cID, Title, Description, Owner, Creation, TimeLimit
                      FROM Challenges) AS c,
