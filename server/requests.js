@@ -163,8 +163,9 @@ module.exports = {
                      FROM Challenges) AS c,
                     (SELECT ID AS tID, Technologie, Challenge AS tChallenge
                      FROM ChallengeTechnologies) AS t
-                    WHERE Who = "${who}"
-                    AND tChallenge = c.cID AND tID = "${tid}"
+                    WHERE cs.Who = "${who}"
+                    AND t.tChallenge = c.cID AND t.Technologie = "${tid}"
+                    AND cs.Challenge = c.cID
                     ORDER BY TakenAt DESC;`;
         
         console.log(`Lista de retos suscritos inactivos solicitada.\n${sql}\n`);
@@ -310,12 +311,12 @@ module.exports = {
     listTecChallenges: function (tid, callback) {
         var result = [];
         var sql = `SELECT * FROM ChallengeTechnologies ct,
-                        (SELECT ID AS cID, Title, Description, Owner, Creation, TimeLimit,
-                        (DATEDIFF(NOW(), DATE_ADD(Creation, INTERVAL TimeLimit DAY))) as Diff
+                        (SELECT ID AS cID, Title, Description, Owner, Creation, TimeLimit
                         FROM Challenges) AS c
-                        WHERE ct.Challenge = c.cID,
-                        AND Tecnologie = "${tid}"
-                        ORDER BY c.Creation DESC;`;
+                        WHERE ct.Challenge = c.cID
+                        AND Technologie = "${tid}"
+                        ORDER BY c.Creation DESC
+                        LIMIT 100;`;
 
         console.log(`Lista de retos solicitada.\n${sql}\n`);
 
@@ -330,14 +331,12 @@ module.exports = {
                 if (results) {
                     if (results.length > 0) {
                         results.forEach(element => {
-                            if (element.Diff > 0) {
-                                result.push({
-                                    ID: element.cID,
-                                    Title: element.Title,
-                                    Description: element.Description,
-                                    Technologie: element.Technologie
-                                })
-                            }
+                            result.push({
+                                ID: element.cID,
+                                Title: element.Title,
+                                Description: element.Description,
+                                Technologie: element.Technologie
+                            });
                         });
 
                         callback(result);
@@ -569,5 +568,97 @@ module.exports = {
                 }
             }
         });
+    },
+
+    // search for user
+    searchUser: function (usr, callback) {
+      var sql = `SELECT ID FROM Users WHERE NickName = "${usr}"`;
+
+      console.log(`Búsqueda de usuario.\n${sql}\n`);
+
+      sqlQuery(sql, function (error, results, fields) {
+          if (error) {
+              console.error(error);
+              callback(-1);
+          } else {
+              if (results) {
+                  if (results.length > 0) {
+                      callback(results[0].ID);
+                  } else {
+                      callback(-1);
+                  }
+              } else {
+                  callback(-1);
+              }
+          }
+      });
+    },
+    
+    // Search challenges
+    search: function (tec, query, callback) {
+        switch (query) {
+            case "news":
+                listTecChallenges(tec, function (ans) {
+                  callback(ans);
+                });
+                break;
+            default:
+                searchUser(query, function (usr) {
+                  if (usr > -1) {
+                    listChallenges(usr, function (ans) {
+                      callback(ans);
+                    });
+                  } else {
+                    var sql = `SELECT * FROM ChallengeTechnologies ct,
+                                    (SELECT ID AS cID, Title, Description, Creation
+                                    FROM Challenges) AS c
+                                    WHERE ct.Challenge = c.cID
+                                    AND c.Title LIKE "%${query}%"
+                                    ORDER BY c.Creation DESC
+                                    LIMIT 100;`;
+
+                    console.log(`Búsqueda de retos.\n${sql}\n`);
+
+                    sqlQuery(sql, function (error, results, fields) {
+                        if (error) {
+                            console.error(error);
+                            callback([{
+                              status: 'error',
+                              data: 'Query error.'
+                            }]);
+                        } else {
+                            if (results) {
+                                if (results.length > 0) {
+                                    var res = [];
+                                    for (var i = 0; i < results.length; i++) {
+                                      var challengeInfo = {
+                                          ID: results[i].cID,
+                                          Title: results[i].Title,
+                                          Description: results[i].Description,
+                                          Technologie: results[i].Technologie
+                                      };
+
+                                      res.push(challengeInfo);
+                                    }
+
+                                    callback(res);
+                                } else {
+                                    callback([{
+                                      status: 'error',
+                                      data: 'No challenges found.'
+                                    }]);
+                                }
+                            } else {
+                                callback([{
+                                  status: 'error',
+                                  data: 'No challenges found.'
+                                }]);
+                            }
+                        }
+                    });
+                  }
+                });
+                break;
+        }
     }
 }
