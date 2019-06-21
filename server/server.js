@@ -107,6 +107,16 @@ server.post('/data', function (req, res) {
         res.send(ans);
       });
       break;
+      
+    case 7:
+      var tec = req.body.Technologie;
+      var qry = req.body.Query;
+      
+      requests.search(tec, qry, function (ans) {
+        console.log(JSON.stringify(ans, 2) + '\n\n');
+        res.send(ans);
+      });
+      break;
   
     default:
       res.send({
