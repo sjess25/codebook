@@ -117,6 +117,16 @@ server.post('/data', function (req, res) {
         res.send(ans);
       });
       break;
+      
+    case 8:
+      var who = req.body.Who;
+      var clg = req.body.Challenge;
+      
+      requests.challengeSubscribe(who, clg, function (ans) {
+        console.log(JSON.stringify(ans, 2) + '\n\n');
+        res.send(ans);
+      });
+      break;
   
     default:
       res.send({
