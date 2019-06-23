@@ -118,16 +118,19 @@ module.exports = {
                     AND t.tChallenge = c.cID
                     AND cs.Challenge = c.cID
                     ORDER BY TakenAt DESC;`;
+        var voidChg = {
+                  ID: undefined,
+                  Title: undefined,
+                  Description: undefined,
+                  Technologie: undefined
+              };
         
         console.log(`Lista de retos suscritos activos solicitada.\n${sql}\n`);
         
         sqlQuery(sql, function (error, results, fields) {
             if (error) {
                 console.error(error);
-                callback([{
-                    status: 'error',
-                    data: error
-                }]);
+                callback([voidChg]);
             } else {
                 if (results) {
                     if (results.length > 0) {
@@ -144,16 +147,10 @@ module.exports = {
 
                         callback(result);
                     } else {
-                        callback([{
-                            status: 'error',
-                            data: 'No challenges found.'
-                        }]);
+                        callback([voidChg]);
                     }
                 } else {
-                    callback([{
-                        status: 'error',
-                        data: 'No challenges found.'
-                    }]);
+                    callback([voidChg]);
                 }
             }
         });
@@ -172,16 +169,19 @@ module.exports = {
                     AND t.tChallenge = c.cID AND t.Technologie = "${tid}"
                     AND cs.Challenge = c.cID
                     ORDER BY TakenAt DESC;`;
+        var voidChg = {
+                  ID: undefined,
+                  Title: undefined,
+                  Description: undefined,
+                  Technologie: undefined
+              };
         
         console.log(`Lista de retos suscritos inactivos solicitada.\n${sql}\n`);
         
         sqlQuery(sql, function (error, results, fields) {
             if (error) {
                 console.error(error);
-                callback([{
-                    status: 'error',
-                    data: error
-                }]);
+                callback([voidChg]);
             } else {
                 if (results) {
                     if (results.length > 0) {
@@ -198,16 +198,10 @@ module.exports = {
 
                         callback(result);
                     } else {
-                        callback([{
-                            status: 'error',
-                            data: 'No challenges found.'
-                        }]);
+                        callback([voidChg]);
                     }
                 } else {
-                    callback([{
-                        status: 'error',
-                        data: 'No challenges found.'
-                    }]);
+                    callback([voidChg]);
                 }
             }
         });
@@ -221,16 +215,19 @@ module.exports = {
                     FROM Challenges WHERE Owner = "${owner}") AS c
                   WHERE ct.Challenge = c.cID
                   ORDER BY c.Creation DESC;`;
+        var voidChg = {
+                  ID: undefined,
+                  Title: undefined,
+                  Description: undefined,
+                  Technologie: undefined
+              };
 
         console.log(`Lista de retos solicitada.\n${sql}\n`);
 
         sqlQuery(sql, function (error, results, fields) {
             if (error) {
                 console.error(error);
-                callback({
-                    status: 'error',
-                    data: error
-                });
+                callback([voidChg]);
             } else {
                 if (results) {
                     if (results.length > 0) {
@@ -245,16 +242,10 @@ module.exports = {
 
                         callback(result);
                     } else {
-                        callback({
-                            status: 'error',
-                            data: 'No challenges found.'
-                        });
+                        callback([voidChg]);
                     }
                 } else {
-                    callback({
-                        status: 'error',
-                        data: 'No challenges found.'
-                    });
+                    callback([voidChg]);
                 }
             }
         });
@@ -312,7 +303,6 @@ module.exports = {
     },
 
     // List technology specific challenges.
-    // --> Wrong use of function. DO NOT USE.
     listTecChallenges: function (tid, callback) {
         var result = [];
         var sql = `SELECT * FROM ChallengeTechnologies ct,
@@ -322,16 +312,19 @@ module.exports = {
                         AND Technologie = "${tid}"
                         ORDER BY c.Creation DESC
                         LIMIT 100;`;
+        var voidChg = {
+                  ID: undefined,
+                  Title: undefined,
+                  Description: undefined,
+                  Technologie: undefined
+              };
 
         console.log(`Lista de retos solicitada.\n${sql}\n`);
 
         sqlQuery(sql, function (error, results, fields) {
             if (error) {
                 console.error(error);
-                callback({
-                    status: 'error',
-                    data: error
-                });
+                callback([voidChg]);
             } else {
                 if (results) {
                     if (results.length > 0) {
@@ -346,16 +339,10 @@ module.exports = {
 
                         callback(result);
                     } else {
-                        callback({
-                            status: 'error',
-                            data: 'No challenges found.'
-                        });
+                        callback([voidChg]);
                     }
                 } else {
-                    callback({
-                        status: 'error',
-                        data: 'No challenges found.'
-                    });
+                    callback([voidChg]);
                 }
             }
         });
@@ -601,6 +588,12 @@ module.exports = {
     
     // Search challenges
     search: function (tec, query, callback) {
+        var voidChg = {
+                          ID: undefined,
+                          Title: undefined,
+                          Description: undefined,
+                          Technologie: undefined
+                      };
         switch (query) {
             case "news":
                 listTecChallenges(tec, function (ans) {
@@ -627,10 +620,7 @@ module.exports = {
                     sqlQuery(sql, function (error, results, fields) {
                         if (error) {
                             console.error(error);
-                            callback([{
-                              status: 'error',
-                              data: 'Query error.'
-                            }]);
+                            callback([voidChg]);
                         } else {
                             if (results) {
                                 if (results.length > 0) {
@@ -648,16 +638,10 @@ module.exports = {
 
                                     callback(res);
                                 } else {
-                                    callback([{
-                                      status: 'error',
-                                      data: 'No challenges found.'
-                                    }]);
+                                    callback([voidChg]);
                                 }
                             } else {
-                                callback([{
-                                  status: 'error',
-                                  data: 'No challenges found.'
-                                }]);
+                                callback([voidChg]);
                             }
                         }
                     });
@@ -684,7 +668,7 @@ module.exports = {
                 if (results) {
                     if (results.insertId > 0) {
                         callback({
-                            aID: resultst.insertId
+                            aID: results.insertId
                         });                                                    
                     } else {
                         callback({
