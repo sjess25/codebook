@@ -110,8 +110,13 @@ module.exports = {
         var sql = `SELECT *, (DATEDIFF(NOW(), DATE_ADD(TakenAt, INTERVAL c.TimeLimit DAY))) as Diff
                     FROM ChallengeSubscribers cs,
                     (SELECT ID AS cID, Title, Description, Owner, Creation, TimeLimit
-                     FROM Challenges) AS c
-                    WHERE Who = "${who}" AND c.cID = cs.Challenge
+                     FROM Challenges) AS c,
+                    (SELECT ID AS tID, Technologie, Challenge AS tChallenge
+                     FROM ChallengeTechnologies) AS t
+                    
+                    WHERE cs.Who = "${who}"
+                    AND t.tChallenge = c.cID
+                    AND cs.Challenge = c.cID
                     ORDER BY TakenAt DESC;`;
         
         console.log(`Lista de retos suscritos activos solicitada.\n${sql}\n`);
@@ -660,5 +665,38 @@ module.exports = {
                 });
                 break;
         }
+    },
+    
+    // subscribe to challenge
+    challengeSubscribe: function (who, challenge, callback) {
+        var sql = `INSERT INTO ChallengeSubscribers (Who, Challenge)
+                    VALUES ("${who}", "${challenge}");`;
+
+        console.log(`Subscripción de reto solicitada.\n${sql}\n`);
+
+        sqlQuery(sql, function (error, results, fields) {
+            if (error) {
+                console.error(error);
+                callback({
+                    aID: -1
+                });
+            } else {
+                if (results) {
+                    if (results.insertId > 0) {
+                        callback({
+                            aID: resultst.insertId
+                        });                                                    
+                    } else {
+                        callback({
+                            aID: -1
+                        });
+                    }
+                } else {
+                    callback({
+                        aID: -1
+                    });
+                }
+            }
+        });
     }
 }
