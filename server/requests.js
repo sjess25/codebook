@@ -109,7 +109,9 @@ module.exports = {
         var result = [];
         var sql = `SELECT *, (DATEDIFF(NOW(), DATE_ADD(TakenAt, INTERVAL c.TimeLimit DAY))) as Diff
                     FROM ChallengeSubscribers cs,
-                    (SELECT ID AS cID, Title, Description, Owner, Creation, TimeLimit
+                    (SELECT (SUM(Positive)) AS Likes, (SUM(Negative)) AS Dislikes, Challenge AS cLK
+                        FROM ChallengeLikes) AS lik,
+                    (SELECT ID AS cID, Title, Description, Owner, Creation, TimeLimit, Owner as cOwn
                      FROM Challenges) AS c,
                     (SELECT ID AS tID, Technologie, Challenge AS tChallenge
                      FROM ChallengeTechnologies) AS t
@@ -117,6 +119,7 @@ module.exports = {
                     WHERE cs.Who = "${who}"
                     AND t.tChallenge = c.cID
                     AND cs.Challenge = c.cID
+                    AND lik.cLK = c.cID
                     ORDER BY TakenAt DESC;`;
         
         console.log(`Lista de retos suscritos activos solicitada.\n${sql}\n`);
@@ -134,7 +137,10 @@ module.exports = {
                                     ID: element.cID,
                                     Title: element.Title,
                                     Description: element.Description,
-                                    Technologie: element.Technologie
+                                    Technologie: element.Technologie,
+                                    Owner: element.cOwn,
+                                    Likes: element.Likes,
+                                    Dislikes: element.Dislikes
                                 });
                             }
                         });
@@ -240,8 +246,10 @@ module.exports = {
         var sql = `SELECT * FROM ChallengeTechnologies ct,
                         (SELECT ID AS cID, Title, Description, Owner, Creation, TimeLimit,
                         (DATEDIFF(NOW(), DATE_ADD(Creation, INTERVAL TimeLimit DAY))) as Diff
-                        FROM Challenges WHERE Owner = "${owner}") AS c
-                        WHERE ct.Challenge = c.cID
+                        FROM Challenges WHERE Owner = "${owner}") AS c,
+                        (SELECT Challenge AS cLK, (SUM(Positive)) AS Likes, (SUM(Negative)) AS Dislikes
+                        FROM ChallengeLikes) AS lk
+                        WHERE ct.Challenge = c.cID AND lk.cLK = c.cID
                         ORDER BY c.Creation DESC;`;
 
         console.log(`Lista de retos solicitada.\n${sql}\n`);
@@ -400,10 +408,11 @@ module.exports = {
 
     // Basic challenge information
     getBasicChallenge: function (ID, callback) {
-        var sql = `SELECT ID AS ChallengeID,
-                        Title, Description, Creation, Difficulty, TimeLimit,
-                        Ref1, Ref2, Ref3
-                    FROM Challenges WHERE ID = "${ID}"
+        var sql = `SELECT *
+                    FROM Challenges cs,
+                    (SELECT Challenge, (SUM(Positive)) AS Likes, (SUM(Negative)) AS Dislikes
+                    FROM ChallengeLikes WHERE Challenge = "${ID}") lk
+                    WHERE ID = "${ID}"
                     ORDER BY Creation DESC;`;
 
         console.log(`Información básica de reto solicitada.\n${sql}\n`);
@@ -427,7 +436,10 @@ module.exports = {
                             TimeLimit: results[0].TimeLimit,
                             Ref1: results[0].Ref1,
                             Ref2: results[0].Ref2,
-                            Ref3: results[0].Ref3
+                            Ref3: results[0].Ref3,
+                            Owner: results[0].Owner,
+                            Likes: results[0].Likes,
+                            Dislikes: results[0].Dislikes
                         };
 
                         callback(challengeInfo);
