@@ -6,6 +6,8 @@ import android.widget.ImageButton
 import android.view.View
 import android.content.Intent
 import android.util.Log
+import android.widget.AdapterView
+import android.widget.ListView
 import android.widget.Toast
 import com.android.volley.Response
 import org.json.JSONArray
@@ -23,6 +25,10 @@ class MainActivity : AppCompatActivity() {
         val bChallengeJava   = findViewById<ImageButton>(R.id.java_challenges)
         val bChallengeProlog = findViewById<ImageButton>(R.id.prolog_challenges)
         val bChallengeRuby   = findViewById<ImageButton>(R.id.ruby_challenges)
+
+        val listChallenge = findViewById<ListView>(R.id.myChallengeList)
+        val adapter = custumAdapter(this, userChallengeList.getList(userChallengeList.getIndex("Activos")))
+        listChallenge.adapter = adapter
 
 
         if(dataUser.getTeacher()){
@@ -42,14 +48,12 @@ class MainActivity : AppCompatActivity() {
                     Network.getJsonArray(this, "http://35.231.202.82:81/data", jsonList, Response.Listener<JSONArray>{
                             response_Json ->
                         try {
-                            for (i in 0.. (response_Json.length() - 1)){
-                                listChallenges.insertChallenge(technology(response_Json.getJSONObject(i).getInt("ID"), response_Json.getJSONObject(i).getString("Title"), response_Json.getJSONObject(i).getString("Description"), dataUser.getDrawable(response_Json.getJSONObject(i).getInt("Technologie"))))
-                                Log.d("list challenge", listChallenges.getList().get(i).title)
-                            }
+                            updateListChallenge(response_Json, "Asesor")
                             val intent = Intent(this, profile::class.java)
                             startActivity(intent)
                         }catch (e: Exception){
                             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                            Log.d("all challenge", e.message)
                         }
                     })
                 } else {
@@ -67,22 +71,104 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             } )
     }
+        if (Network.vNetwork(this)) {
 
-        bChallengeC.setOnClickListener(View.OnClickListener {
-            val intentC = Intent(this, myChallenge::class.java)
-            startActivity(intentC)
+            bChallengeC.setOnClickListener(View.OnClickListener {
+                getListFinishChallenge("C")
+
+            })
+
+            bChallengeJava.setOnClickListener(View.OnClickListener {
+                getListFinishChallenge("Java")
+            })
+
+            bChallengeProlog.setOnClickListener(View.OnClickListener {
+                getListFinishChallenge("Prolog")
+
+            })
+
+            bChallengeRuby.setOnClickListener(View.OnClickListener {
+                getListFinishChallenge("Ruby")
+
+            })
+
+            listChallenge.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+                //Toast.makeText(this, listChallenges.getList()[position].title, Toast.LENGTH_LONG).show()
+                if(Network.vNetwork(this)) {
+                    val params = LinkedHashMap<String,String>()
+                    params["ID"] = 4.toString()
+                    params["Challenge"] = userChallengeList.getList(userChallengeList.getIndex("Activos"))[position].id.toString() //listChallenges.getList()[position].id.toString()
+                    val jsonUser = JSONObject(params)
+
+                    Network.getJson(this, "http://35.231.202.82:81/data", jsonUser, Response.Listener<JSONObject>{
+                            response_Json ->
+                        try {
+                            Log.d("send challenge", jsonUser.toString())
+                            Log.d("response challenge", response_Json.toString())
+
+                            var likes: Int = 0
+                            var dislikes: Int = 0
+
+                            if (response_Json["Likes"].toString() != "null") {
+                                likes = response_Json["Likes"].toString().toInt()
+                            }
+                            if (response_Json["Dislikes"].toString() != "null") {
+                                dislikes = response_Json["Dislikes"].toString().toInt()
+                            }
+
+                            newChallenge.setInfoChallenge(response_Json["Title"].toString(), response_Json["Description"].toString(), response_Json["Difficulty"].toString().toInt(), response_Json["TimeLimit"].toString().toInt(), response_Json["Ref1"].toString(), response_Json["Ref2"].toString(), response_Json["Ref3"].toString(), response_Json["Owner"].toString().toInt(), likes, dislikes)
+                            val intentInfo = Intent(this, ViewPost::class.java)
+                            intentInfo.putExtra("state", "Responder")
+                            startActivity(intentInfo)
+                        }catch (e: Exception){
+                            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                } else {
+                    Toast.makeText(this, "Sin conexion", Toast.LENGTH_LONG).show()
+                }
+            }
+        } else {
+            Toast.makeText(this, "Sin conexion", Toast.LENGTH_LONG).show()
+        }
+
+    }
+
+    fun getListFinishChallenge(technology: String) {
+
+        val paramsArray = LinkedHashMap<String,String>()
+        paramsArray["ID"] = 6.toString()
+        paramsArray["Who"] = dataUser.getID().toString()
+        paramsArray["Technologie"] = dataUser.getIDTechnology(technology).toString()
+        val jsonChallenge = JSONObject(paramsArray)
+        val jsonKeyAChallenge = JSONArray()
+        jsonKeyAChallenge.put(jsonChallenge)
+
+        Network.getJsonArray(this, "http://35.231.202.82:81/data", jsonKeyAChallenge, Response.Listener<JSONArray>{
+                response_Array ->
+            try {
+                Log.d("json send technologie", jsonKeyAChallenge.toString())
+                Log.d("json finish challenge", response_Array.toString())
+                updateListChallenge(response_Array, technology)
+
+                val intentChallenge = Intent(this, myChallenge::class.java)
+                intentChallenge.putExtra("id", technology)
+                startActivity(intentChallenge)
+            } catch (e:Exception) {
+                Log.d("json active challenge", response_Array.toString())
+            }
         })
-        bChallengeJava.setOnClickListener(View.OnClickListener {
-            val intentJava = Intent(this, myChallenge::class.java)
-            startActivity(intentJava)
-        })
-        bChallengeProlog.setOnClickListener(View.OnClickListener {
-            val intentProlog = Intent(this, myChallenge::class.java)
-            startActivity(intentProlog)
-        })
-        bChallengeRuby.setOnClickListener(View.OnClickListener {
-            val intentRuby = Intent(this, myChallenge::class.java)
-            startActivity(intentRuby)
-        })
+    }
+
+    fun updateListChallenge(list: JSONArray, type: String){
+
+        for (i in 0.. (list.length() - 1)){
+            listChallenges.insertChallenge(technology(list.getJSONObject(i).getInt("ID"), list.getJSONObject(i).getString("Title"), list.getJSONObject(i).getString("Description"), dataUser.getDrawable(list.getJSONObject(i).getInt("Technologie"))))
+            Log.d("list challenge", listChallenges.getList().get(i).title)
+        }
+
+        userChallengeList.insertListChallenge(userChallengeList.getIndex(type))
+        listChallenges.clear()
+
     }
 }

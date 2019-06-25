@@ -12,4 +12,8 @@ object listChallenges {
     fun getList(): ArrayList<technology>{
         return miChallenges
     }
+
+    fun clear(){
+        miChallenges.clear()
+    }
 }

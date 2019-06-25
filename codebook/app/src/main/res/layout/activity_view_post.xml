@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:layout_weight=".1"
                 style="@style/Widget.AppCompat.Button.Borderless" android:textColor="@color/colorBgUAMC"
-                android:id="@+id/acceptChallenge_button"/>
+                android:id="@+id/state_button"/>
     </LinearLayout>
     <ScrollView
             android:layout_width="match_parent"

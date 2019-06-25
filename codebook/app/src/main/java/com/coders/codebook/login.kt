@@ -59,10 +59,17 @@ class login : AppCompatActivity() {
                                                 response_Array ->
                                             try {
                                                 Log.d("json active challenge", response_Array.toString())
+                                                for (i in 0.. (response_Array.length() - 1)){
+                                                    listChallenges.insertChallenge(technology(response_Array.getJSONObject(i).getInt("ID"), response_Array.getJSONObject(i).getString("Title"), response_Array.getJSONObject(i).getString("Description"), dataUser.getDrawable(response_Array.getJSONObject(i).getInt("Technologie"))))
+                                                    Log.d("list challenge", listChallenges.getList().get(i).title)
+                                                }
+
+                                                userChallengeList.insertListChallenge(userChallengeList.getIndex("Activos"))
+                                                listChallenges.clear()
                                                 val intent = Intent(this, MainActivity::class.java)
                                                 startActivity(intent)
                                             } catch (e:Exception) {
-                                                Log.d("json active challenge", response_Array.toString())
+                                                Log.d("error json active challenge", e.message)
                                             }
                                         })
                                     }

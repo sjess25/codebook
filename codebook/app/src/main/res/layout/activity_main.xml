@@ -69,6 +69,6 @@
             android:layout_height="wrap_content" android:id="@+id/textView5" android:background="@color/blackUAMC"
             android:textSize="30sp" android:textColor="#FFFFFF"/>
     <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" android:background="#00C7BFBF" android:id="@+id/feeds"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/myChallengeList"/>
 </LinearLayout>

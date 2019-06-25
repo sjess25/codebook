@@ -14,6 +14,8 @@ object newChallenge {
     var ref2: String = ""
     var ref3: String = ""
     var answer: String = ""
+    var likes: Int = 0
+    var dislikes: Int = 0
 
 
     fun create(technologie: String, title: String, description: String, difficulty: Int, timeLimit: Int, owner: Int, ref1: String, ref2: String, ref3: String) {
@@ -32,6 +34,21 @@ object newChallenge {
     fun setAnswerChallenge(answer: String) {
 
         this.answer = answer
+    }
+
+    fun setInfoChallenge(title: String, description: String, difficulty: Int, timeLimit: Int, ref1: String, ref2: String, ref3: String, owner: Int, likes: Int, dislikes: Int) {
+
+        this.title = title
+        this.description =  description
+        this.difficulty = difficulty
+        this.timeLimit = timeLimit
+        this.ref1 = ref1
+        this.ref2 = ref2
+        this.ref3 = ref3
+        this.owner = owner
+        this.likes = likes
+        this.dislikes = dislikes
+
     }
 
     fun getJsonSENDpost(): JSONObject {
