@@ -580,9 +580,10 @@ module.exports = {
                 });
                 break;
             default:
+                var me = this;
                 this.searchUser(query, function (usr) {
                   if (usr > -1) {
-                    this.listChallenges(usr, function (ans) {
+                    me.listChallenges(usr, function (ans) {
                       callback(ans);
                     });
                   } else {
