@@ -15,7 +15,7 @@
     <string name="createChallengue_label">Crear Desafio</string>
     /*Label for description items*/
     <string name="name_label">Nombre</string>
-    <string name="userName_label">NickName</string>
+    <string name="userName_label">Nombre de Usuario</string>
     <string name="email_label">Correo</string>
     <string name="oldPassword_label">Contraseña actual</string>
     <string name="empty"></string>
@@ -46,6 +46,8 @@
     <string name="warning_post_solution">*Para publicar tu reto debes de conocer la solucion</string>
     <string name="hint_solution_techer">Por favor ingrese la solucion aqui...</string>
     <string name="hint_searchViewer">Buscar reto...</string>
+    <string name="hint_nickName">Nombre de Usuario</string>
+    <string name="hint_password">Contraseña</string>
     /*Variables? aun no se como se usan*/
     <string name="nickname_label">"@Usuario"</string>
     <string name="follow_label">Seguir</string>
@@ -56,5 +58,6 @@
     <string name="editProfile_label">Editar perfil</string>
     <string name="searchview_label">Buscar</string>
     <string name="myChallenges_label">Mis desafios</string>
+    <string name="answers_label">Respuestas</string>
 
 </resources>

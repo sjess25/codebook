@@ -35,12 +35,12 @@
             android:background="@color/blackUAMC"
             android:textColor="#FFFFFF" android:textSize="30sp"/>
     <HorizontalScrollView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:background="#00C7BFBF">
         <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" android:layout_gravity="center">
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
             <ImageButton
                     android:layout_width="80dp"
                     android:layout_height="80dp" app:srcCompat="@drawable/c" android:id="@+id/c_challenges"
@@ -59,6 +59,12 @@
             <ImageButton
                     android:layout_width="80dp"
                     android:layout_height="80dp" app:srcCompat="@drawable/ruby" android:id="@+id/ruby_challenges"
+                    android:layout_weight="1" android:scaleType="centerCrop"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+            <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" app:srcCompat="@drawable/praxis_logo"
+                    android:id="@+id/praxis_challenges"
                     android:layout_weight="1" android:scaleType="centerCrop"
                     style="@style/Widget.AppCompat.Button.Borderless"/>
         </LinearLayout>

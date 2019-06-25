@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         val bChallengeJava   = findViewById<ImageButton>(R.id.java_challenges)
         val bChallengeProlog = findViewById<ImageButton>(R.id.prolog_challenges)
         val bChallengeRuby   = findViewById<ImageButton>(R.id.ruby_challenges)
+        val bChallengePraxis = findViewById<ImageButton>(R.id.praxis_challenges)
 
         val listChallenge = findViewById<ListView>(R.id.myChallengeList)
         val adapter = custumAdapter(this, userChallengeList.getList(userChallengeList.getIndex("Activos")))
@@ -90,6 +91,10 @@ class MainActivity : AppCompatActivity() {
             bChallengeRuby.setOnClickListener(View.OnClickListener {
                 getListFinishChallenge("Ruby")
 
+            })
+
+            bChallengePraxis.setOnClickListener(View.OnClickListener {
+                getListFinishChallenge("Praxis")
             })
 
             listChallenge.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
