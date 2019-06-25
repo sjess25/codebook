@@ -406,8 +406,9 @@ module.exports = {
         var sql = `SELECT *
                     FROM Challenges cs,
                     (SELECT Challenge, (SUM(Positive)) AS Likes, (SUM(Negative)) AS Dislikes
-                    FROM ChallengeLikes WHERE Challenge = "${ID}") lk
-                    WHERE ID = "${ID}"
+                    FROM ChallengeLikes WHERE Challenge = "${ID}") lk,
+                    (SELECT ID as uID, NickName FROM Users) as usr
+                    WHERE ID = "${ID}" AND usr.uID = cs.Owner
                     ORDER BY Creation DESC;`;
 
         console.log(`Información básica de reto solicitada.\n${sql}\n`);
@@ -433,6 +434,7 @@ module.exports = {
                             Ref2: results[0].Ref2,
                             Ref3: results[0].Ref3,
                             Owner: results[0].Owner,
+                            OwnerNickname: results[0].NickName,
                             Likes: results[0].Likes,
                             Dislikes: results[0].Dislikes
                         };
@@ -660,4 +662,11 @@ module.exports = {
             }
         });
     }
+    
+    // Liking challenges
+    
+    // Answer a challenge
+    
+    // User profile modification
+    // --> accepted changes: email, name, password
 }
