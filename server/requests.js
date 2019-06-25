@@ -103,27 +103,24 @@ module.exports = {
             }
         });
     },
-    
+
     // List user subscribed active challenges.
     activeSubscribed: function (who, callback) {
         var result = [];
         var sql = `SELECT *, (DATEDIFF(NOW(), DATE_ADD(TakenAt, INTERVAL c.TimeLimit DAY))) as Diff
                     FROM ChallengeSubscribers cs,
-                    (SELECT (SUM(Positive)) AS Likes, (SUM(Negative)) AS Dislikes, Challenge AS cLK
-                        FROM ChallengeLikes) AS lik,
                     (SELECT ID AS cID, Title, Description, Owner, Creation, TimeLimit, Owner as cOwn
                      FROM Challenges) AS c,
                     (SELECT ID AS tID, Technologie, Challenge AS tChallenge
                      FROM ChallengeTechnologies) AS t
-                    
+
                     WHERE cs.Who = "${who}"
                     AND t.tChallenge = c.cID
                     AND cs.Challenge = c.cID
-                    AND lik.cLK = c.cID
                     ORDER BY TakenAt DESC;`;
-        
+
         console.log(`Lista de retos suscritos activos solicitada.\n${sql}\n`);
-        
+
         sqlQuery(sql, function (error, results, fields) {
             if (error) {
                 console.error(error);
@@ -138,9 +135,7 @@ module.exports = {
                                     Title: element.Title,
                                     Description: element.Description,
                                     Technologie: element.Technologie,
-                                    Owner: element.cOwn,
-                                    Likes: element.Likes,
-                                    Dislikes: element.Dislikes
+                                    Owner: element.cOwn
                                 });
                             }
                         });
@@ -155,7 +150,7 @@ module.exports = {
             }
         });
     },
-    
+
     // List user subscribed inactive challenges per technology.
     inactiveSubscribed: function (who, tid, callback) {
         var result = [];
@@ -169,9 +164,9 @@ module.exports = {
                     AND t.tChallenge = c.cID AND t.Technologie = "${tid}"
                     AND cs.Challenge = c.cID
                     ORDER BY TakenAt DESC;`;
-        
+
         console.log(`Lista de retos suscritos inactivos solicitada.\n${sql}\n`);
-        
+
         sqlQuery(sql, function (error, results, fields) {
             if (error) {
                 console.error(error);
@@ -200,7 +195,7 @@ module.exports = {
             }
         });
     },
-    
+
     // List user owned challenges.
     listChallenges: function (owner, callback) {
         var result = [];
@@ -365,7 +360,7 @@ module.exports = {
                             Ref2: results[0].Ref2,
                             Ref3: results[0].Ref3
                         };
-                        
+
                         // --->> Added challenge owner answer distinction.
                         var answers = [];
                         var oanswer = {};
@@ -458,7 +453,7 @@ module.exports = {
             }
         });
     },
-    
+
     // post a challenge
     postChallenge: function (tec, tit, des, dif, til, own, ans, rf1, rf2, rf3, callback) {
         var sql = `INSERT INTO Challenges (Title, Description, Difficulty, TimeLimit, Owner, Ref1, Ref2, Ref3)
@@ -573,19 +568,19 @@ module.exports = {
           }
       });
     },
-    
+
     // Search challenges
     search: function (tec, query, callback) {
         switch (query) {
             case "news":
-                listTecChallenges(tec, function (ans) {
+                this.listTecChallenges(tec, function (ans) {
                   callback(ans);
                 });
                 break;
             default:
-                searchUser(query, function (usr) {
+                this.searchUser(query, function (usr) {
                   if (usr > -1) {
-                    listChallenges(usr, function (ans) {
+                    this.listChallenges(usr, function (ans) {
                       callback(ans);
                     });
                   } else {
@@ -632,7 +627,7 @@ module.exports = {
                 break;
         }
     },
-    
+
     // subscribe to challenge
     challengeSubscribe: function (who, challenge, callback) {
         var sql = `INSERT INTO ChallengeSubscribers (Who, Challenge)
@@ -651,7 +646,7 @@ module.exports = {
                     if (results.insertId > 0) {
                         callback({
                             aID: results.insertId
-                        });                                                    
+                        });
                     } else {
                         callback({
                             aID: -1
