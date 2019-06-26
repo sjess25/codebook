@@ -127,6 +127,26 @@ server.post('/data', function (req, res) {
         res.send(ans);
       });
       break;
+    
+    case 9: // get answers from a challenge.
+      var clg = req.body.Challenge;
+
+      requests.readAnswers(clg, function (ans) {
+        console.log(JSON.stringify(ans, 2) + '\n\n');
+        res.send(ans);
+      });
+      break;
+    
+    case 10: // post an answer.
+      var own = req.body.Owner;
+      var ans = req.body.Answer;
+      var clg = req.body.Challenge;
+      
+      requests.doAnswer(own, ans, clg, function (ans) {
+        console.log(JSON.stringify(ans, 2) + '\n\n');
+        res.send(ans);
+      });
+      break;
   
     default:
       res.send({
