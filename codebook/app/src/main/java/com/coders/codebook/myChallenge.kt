@@ -1,9 +1,11 @@
 package com.coders.codebook
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.SearchView
@@ -32,6 +34,10 @@ class myChallenge : AppCompatActivity() {
 
         val search = findViewById<SearchView>(R.id.searchChallenges)
 
+        search.setOnClickListener {
+            search.setIconifiedByDefault(false)
+        }
+
 
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
@@ -54,6 +60,18 @@ class myChallenge : AppCompatActivity() {
                             response_Array ->
                         try {
                             Log.d("json search challenge", response_Array.toString())
+                            for (i in 0.. (response_Array.length() - 1)){
+                                listChallenges.insertChallenge(technology(response_Array.getJSONObject(i).getInt("ID"), response_Array.getJSONObject(i).getString("Title"), response_Array.getJSONObject(i).getString("Description"), dataUser.getDrawable(response_Array.getJSONObject(i).getInt("Technologie"))))
+                                Log.d("list challenge", listChallenges.getList().get(i).title)
+                            }
+
+                            userChallengeList.insertListChallenge(userChallengeList.getIndex("Search"))
+                            listChallenges.clear()
+
+                            val intentSearch = Intent(c, Searcher::class.java)
+                            intentSearch.putExtra("id", "Search")
+                            startActivity(intentSearch)
+
                         } catch (e:Exception) {
                             Log.d("json search challenge", e.message)
                         }
@@ -92,8 +110,11 @@ class myChallenge : AppCompatActivity() {
                         }
 
                         newChallenge.setInfoChallenge(response_Json["Title"].toString(), response_Json["Description"].toString(), response_Json["Difficulty"].toString().toInt(), response_Json["TimeLimit"].toString().toInt(), response_Json["Ref1"].toString(), response_Json["Ref2"].toString(), response_Json["Ref3"].toString(), response_Json["Owner"].toString().toInt(), likes, dislikes)
+                        newChallenge.id = response_Json["ID"].toString().toInt()
+                        newChallenge.ownerNickname = response_Json["OwnerNickname"].toString()
                         val intentInfo = Intent(this, ViewPost::class.java)
                         intentInfo.putExtra("state", "Ver Respuestas")
+                        intentInfo.putExtra("challenge", userChallengeList.getList(userChallengeList.getIndex(idTec))[position].id.toString())
                         startActivity(intentInfo)
                     }catch (e: Exception){
                         Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()

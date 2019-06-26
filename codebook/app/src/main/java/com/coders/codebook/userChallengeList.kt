@@ -5,6 +5,8 @@ import android.util.Log
 object userChallengeList {
 
     var allChallenge = LinkedHashMap<Int,ArrayList<technology>>()
+    var allAnswer: ArrayList<answer> = ArrayList()
+    var answerOwner: answer = answer("","")
 
     fun insertListChallenge(index: Int){
 
@@ -20,9 +22,8 @@ object userChallengeList {
     fun getList(index: Int): ArrayList<technology> {
         return allChallenge[index]!!
     }
-    fun updateList(list: ArrayList<technology>, index: Int){
-       // userChallengeList.allChallenge[index].clear()
-        //userChallengeList.allChallenge.add(index, list)
+    fun updateList(new: technology, index: Int){
+       allChallenge[index]!!.add(new)
     }
 
     fun getIndex(name: String): Int{
@@ -34,7 +35,12 @@ object userChallengeList {
             "Ruby" -> return 3
             "Prolog" -> return 4
             "Asesor" -> return 5
+            "Search" -> return 6
         }
         return -1
+    }
+
+    fun saveOwnerAnswer(owner: String, answer: String){
+        answerOwner.insert(owner, answer)
     }
 }

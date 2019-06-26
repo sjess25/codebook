@@ -52,6 +52,7 @@ object dataUser {
             6 -> return R.drawable.java
             1 -> return R.drawable.ruby
             5 -> return R.drawable.prolog
+            7 -> return R.drawable.praxis_logo
         }
         return -1
     }
@@ -63,6 +64,7 @@ object dataUser {
             "Java" -> return 6
             "Ruby" -> return 1
             "Prolog" -> return 5
+            "Praxis" -> return 7
         }
         return -1
     }

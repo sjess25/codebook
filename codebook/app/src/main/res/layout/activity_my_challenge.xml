@@ -28,7 +28,7 @@
     <SearchView
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:queryHint="@string/hint_searchViewer"
-            android:id="@+id/searchChallenges"/>
+            android:id="@+id/searchChallenges" android:clickable="true"/>
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

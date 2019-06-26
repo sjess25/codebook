@@ -3,6 +3,7 @@ package com.coders.codebook
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -41,7 +42,7 @@ class signup : AppCompatActivity() {
                     params["Email"] = email
                     params["Password"] = password
                     val jsonObject = JSONObject(params)
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, login::class.java)
                     Network.postHTTP(this, "http://35.231.202.82:81/register", jsonObject, Response.Listener<JSONObject>{
                         response ->
                         try {
@@ -49,7 +50,23 @@ class signup : AppCompatActivity() {
                             //Toast.makeText(this, respJson, Toast.LENGTH_LONG).show()
                             if (response.get("result").toString() == "success"){
                                 Toast.makeText(this, "registered user", Toast.LENGTH_LONG).show()
-                                startActivity(intent)
+                                val params_post = LinkedHashMap<String,String>()
+                                params_post["ID"] = 8.toString()
+                                params_post["Who"] = response.get("data").toString()
+                                params_post["Challenge"] = 14.toString()
+                                val jsonUser = JSONObject(params_post)
+
+                                Network.getJson(this, "http://35.231.202.82:81/data", jsonUser, Response.Listener<JSONObject>{
+                                        response_Json ->
+                                    try {
+                                        Log.d("send register", jsonUser.toString())
+                                        Log.d("response register", response_Json.toString())
+                                        (this as signup).finish()
+                                        startActivity(intent)
+                                    }catch (e: java.lang.Exception){
+                                        Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                                    }
+                                })
                             } else {
                                 Toast.makeText(this, response.get("data").toString(), Toast.LENGTH_LONG).show()
                             }

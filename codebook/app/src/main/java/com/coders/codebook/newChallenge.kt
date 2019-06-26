@@ -4,6 +4,7 @@ import org.json.JSONObject
 
 object newChallenge {
 
+    var id: Int = -1
     var technologie: String = ""
     var title: String = ""
     var description: String =  ""
@@ -16,6 +17,7 @@ object newChallenge {
     var answer: String = ""
     var likes: Int = 0
     var dislikes: Int = 0
+    var ownerNickname: String = ""
 
 
     fun create(technologie: String, title: String, description: String, difficulty: Int, timeLimit: Int, owner: Int, ref1: String, ref2: String, ref3: String) {

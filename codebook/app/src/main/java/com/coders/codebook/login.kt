@@ -66,6 +66,7 @@ class login : AppCompatActivity() {
 
                                                 userChallengeList.insertListChallenge(userChallengeList.getIndex("Activos"))
                                                 listChallenges.clear()
+                                                (this as login).finish()
                                                 val intent = Intent(this, MainActivity::class.java)
                                                 startActivity(intent)
                                             } catch (e:Exception) {

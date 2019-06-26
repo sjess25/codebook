@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.view.View
 import android.content.Intent
+import android.support.v4.widget.SwipeRefreshLayout
 import android.util.Log
 import android.widget.AdapterView
 import android.widget.ListView
@@ -13,8 +14,13 @@ import com.android.volley.Response
 import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
+import android.os.Handler
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var mHandler: Handler
+    private lateinit var mRunnable:Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +34,48 @@ class MainActivity : AppCompatActivity() {
         val bChallengePraxis = findViewById<ImageButton>(R.id.praxis_challenges)
 
         val listChallenge = findViewById<ListView>(R.id.myChallengeList)
-        val adapter = custumAdapter(this, userChallengeList.getList(userChallengeList.getIndex("Activos")))
+        var adapter = custumAdapter(this, userChallengeList.getList(userChallengeList.getIndex("Activos")))
         listChallenge.adapter = adapter
 
+        val swipeContainer = findViewById<SwipeRefreshLayout>(R.id.update_main)
+        mHandler = Handler()
+
+        swipeContainer.setOnRefreshListener {
+            mRunnable = Runnable {
+                if (Network.vNetwork(this)) {
+                    val paramsArray = LinkedHashMap<String,String>()
+                    paramsArray["ID"] = 5.toString()
+                    paramsArray["Who"] = dataUser.getID().toString()
+                    val jsonChallenge = JSONObject(paramsArray)
+                    val jsonKeyAChallenge = JSONArray()
+                    jsonKeyAChallenge.put(jsonChallenge)
+
+                    Network.getJsonArray(this, "http://35.231.202.82:81/data", jsonKeyAChallenge, Response.Listener<JSONArray>{
+                            response_Array ->
+                        try {
+                            userChallengeList.allChallenge[userChallengeList.getIndex("Activos")]!!.clear()
+                            Log.d("json active challenge", response_Array.toString())
+                            for (i in 0.. (response_Array.length() - 1)){
+                                listChallenges.insertChallenge(technology(response_Array.getJSONObject(i).getInt("ID"), response_Array.getJSONObject(i).getString("Title"), response_Array.getJSONObject(i).getString("Description"), dataUser.getDrawable(response_Array.getJSONObject(i).getInt("Technologie"))))
+                                Log.d("list challenge", listChallenges.getList().get(i).title)
+                            }
+
+                            userChallengeList.insertListChallenge(userChallengeList.getIndex("Activos"))
+                            listChallenges.clear()
+                            adapter = custumAdapter(this, userChallengeList.getList(userChallengeList.getIndex("Activos")))
+                            listChallenge.adapter = adapter
+                        } catch (e:Exception) {
+                            Log.d("error json active challenge", e.message)
+                        }
+                    })
+                } else {
+                    Toast.makeText(this, "Sin conexion", Toast.LENGTH_LONG).show()
+                }
+                swipeContainer.isRefreshing = false
+            }
+            mHandler.postDelayed(mRunnable,
+                1500.toLong())
+        }
 
         if(dataUser.getTeacher()){
 
@@ -122,8 +167,11 @@ class MainActivity : AppCompatActivity() {
                             }
 
                             newChallenge.setInfoChallenge(response_Json["Title"].toString(), response_Json["Description"].toString(), response_Json["Difficulty"].toString().toInt(), response_Json["TimeLimit"].toString().toInt(), response_Json["Ref1"].toString(), response_Json["Ref2"].toString(), response_Json["Ref3"].toString(), response_Json["Owner"].toString().toInt(), likes, dislikes)
+                            newChallenge.id = response_Json["ID"].toString().toInt()
+                            newChallenge.ownerNickname = response_Json["OwnerNickname"].toString()
                             val intentInfo = Intent(this, ViewPost::class.java)
                             intentInfo.putExtra("state", "Responder")
+                            intentInfo.putExtra("challenge", userChallengeList.getList(userChallengeList.getIndex("Activos"))[position].id.toString())
                             startActivity(intentInfo)
                         }catch (e: Exception){
                             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()

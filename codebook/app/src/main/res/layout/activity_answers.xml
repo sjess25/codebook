@@ -23,10 +23,19 @@
                 android:textSize="36sp" android:textColor="@color/colorBgUAMC"/>
     </LinearLayout>
     <TextView
+            android:text="Creador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/nickname_owner" android:textStyle="bold|italic"/>
+    <TextView
             android:text="Aqui deberia ir una respuesta del reto seleccionado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/answer_teacher" android:textSize="18sp"/>
-    <ListView
+    <android.support.v4.widget.SwipeRefreshLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/answers_students"/>
+            android:layout_height="match_parent" android:id="@+id/update_main">
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="596dp" android:id="@+id/answers_students"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

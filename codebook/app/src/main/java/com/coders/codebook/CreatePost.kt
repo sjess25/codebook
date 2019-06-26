@@ -62,6 +62,7 @@ class CreatePost : AppCompatActivity() {
 
             newChallenge.create(dataUser.getIDTechnology(bpopup_languages.getText().toString()).toString(), textTitle.getText().toString(), textDescrption.getText().toString(),bpopup_dificulty.getText().toString().toInt(), bpopup_time.getText().toString().toInt(), dataUser.getID(), textRef1.getText().toString(), textRef2.getText().toString(), textRef3.getText().toString())
             val intent_post = Intent(this, PostSololution::class.java)
+            intent_post.putExtra("id", "0")
             startActivity(intent_post)
         })
     }

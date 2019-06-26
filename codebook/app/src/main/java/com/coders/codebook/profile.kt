@@ -66,6 +66,7 @@ class profile : AppCompatActivity() {
                         newChallenge.setInfoChallenge(response_Json["Title"].toString(), response_Json["Description"].toString(), response_Json["Difficulty"].toString().toInt(), response_Json["TimeLimit"].toString().toInt(), response_Json["Ref1"].toString(), response_Json["Ref2"].toString(), response_Json["Ref3"].toString(), response_Json["Owner"].toString().toInt(), likes, dislikes)
                         val intentInfo = Intent(this, ViewPost::class.java)
                         intentInfo.putExtra("state", "Ver Respuestas")
+                        intentInfo.putExtra("challenge", userChallengeList.getList(userChallengeList.getIndex("Asesor"))[position].id.toString())
                         startActivity(intentInfo)
                     }catch (e: Exception){
                         Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
