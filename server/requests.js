@@ -112,13 +112,17 @@ module.exports = {
                     (SELECT ID AS cID, Title, Description, Owner, Creation, TimeLimit, Owner as cOwn
                      FROM Challenges) AS c,
                     (SELECT ID AS tID, Technologie, Challenge AS tChallenge
-                     FROM ChallengeTechnologies) AS t
+                     FROM ChallengeTechnologies) AS t,
+                    (SELECT Owner AS aOwn, Answer, Challenge AS aChallenge FROM ChallengeAnswers) as a
 
-                    WHERE cs.Who = "${who}"
+                    WHERE cs.Who = "1"
                     AND t.tChallenge = c.cID
                     AND cs.Challenge = c.cID
+                    AND a.aOwn = "1"
+                    AND a.aChallenge = c.cID
                     ORDER BY TakenAt DESC;`;
-
+        var sqlA = ``;
+        
         console.log(`Lista de retos suscritos activos solicitada.\n${sql}\n`);
 
         sqlQuery(sql, function (error, results, fields) {
@@ -129,7 +133,7 @@ module.exports = {
                 if (results) {
                     if (results.length > 0) {
                         results.forEach(element => {
-                            if (element.Diff <= 0) {
+                            if (element.Diff <= 0 && element.Answer == "") {
                                 result.push({
                                     ID: element.cID,
                                     Title: element.Title,
@@ -662,11 +666,79 @@ module.exports = {
                 }
             }
         });
-    }
+    },
+
+    // Getting answers
+    readAnswers: function (challenge, callback) {
+      var sql = `SELECT * FROM ChallengeAnswers ca,
+                (SELECT ID AS uID, NickName FROM Users) AS usr
+                 WHERE Challenge = "${challenge}"
+                 AND usr.uID = ca.Owner;`;
+
+      console.log(`Obtener respuestas de reto solicitada.\n${sql}\n`);
+
+      sqlQuery(sql, function (error, results, fields) {
+        if (error) {
+            console.error(error);
+            callback([]);
+        } else {
+            if (results) {
+                if (results.length > 0) {
+                    var res = [];
+                    for (var i = 0; i < results.length; i++) {
+                      var challengeInfo = {
+                          Owner: results[i].NickName,
+                          Answer: results[i].Answer
+                      };
+
+                      res.push(challengeInfo);
+                    }
+
+                    callback(res);
+                } else {
+                    callback([]);
+                }
+            } else {
+                callback([]);
+            }
+        }
+      });
+    },
     
     // Liking challenges
     
     // Answer a challenge
+    doAnswer: function (who, answer, challenge, callback) {
+      var sql = `INSERT INTO ChallengeAnswers (Owner, Challenge, Answer)
+                  VALUES ("${who}", "${challenge}", "${answer}");`;
+
+      console.log(`Responder a reto solicitada.\n${sql}\n`);
+
+      sqlQuery(sql, function (error, results, fields) {
+          if (error) {
+              console.error(error);
+              callback({
+                  aID: -1
+              });
+          } else {
+              if (results) {
+                  if (results.insertId > 0) {
+                      callback({
+                          aID: results.insertId
+                      });
+                  } else {
+                      callback({
+                          aID: -1
+                      });
+                  }
+              } else {
+                  callback({
+                      aID: -1
+                  });
+              }
+          }
+      });
+    }
     
     // User profile modification
     // --> accepted changes: email, name, password
