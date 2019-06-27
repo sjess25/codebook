@@ -108,19 +108,15 @@ module.exports = {
     activeSubscribed: function (who, callback) {
         var result = [];
         var sql = `SELECT *, (DATEDIFF(NOW(), DATE_ADD(TakenAt, INTERVAL c.TimeLimit DAY))) as Diff
-                    FROM ChallengeSubscribers cs,
-                    (SELECT ID AS cID, Title, Description, Owner, Creation, TimeLimit, Owner as cOwn
-                     FROM Challenges) AS c,
-                    (SELECT ID AS tID, Technologie, Challenge AS tChallenge
-                     FROM ChallengeTechnologies) AS t,
-                    (SELECT Owner AS aOwn, Answer, Challenge AS aChallenge FROM ChallengeAnswers) as a
-
-                    WHERE cs.Who = "1"
-                    AND t.tChallenge = c.cID
-                    AND cs.Challenge = c.cID
-                    AND a.aOwn = "1"
-                    AND a.aChallenge = c.cID
-                    ORDER BY TakenAt DESC;`;
+                     FROM ChallengeSubscribers cs,
+                     (SELECT ID AS cID, Title, Description, Owner, Creation, TimeLimit, Owner as cOwn
+                      FROM Challenges) AS c,
+                     (SELECT ID AS tID, Technologie, Challenge AS tChallenge
+                      FROM ChallengeTechnologies) AS t
+                     WHERE cs.Who = "${who}"
+                     AND t.tChallenge = c.cID
+                     AND cs.Challenge = c.cID
+                     ORDER BY TakenAt DESC;`;
         var sqlA = ``;
         
         console.log(`Lista de retos suscritos activos solicitada.\n${sql}\n`);
@@ -133,7 +129,7 @@ module.exports = {
                 if (results) {
                     if (results.length > 0) {
                         results.forEach(element => {
-                            if (element.Diff <= 0 && element.Answer == "") {
+                            if (element.Diff <= 0) {
                                 result.push({
                                     ID: element.cID,
                                     Title: element.Title,
@@ -428,7 +424,7 @@ module.exports = {
                 if (results) {
                     if (results.length > 0) {
                         var challengeInfo = {
-                            ID: results[0].ChallengeID,
+                            ID: results[0].ID,
                             Title: results[0].Title,
                             Description: results[0].Description,
                             Creation: results[0].Creation,
