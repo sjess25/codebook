@@ -3,12 +3,14 @@ package com.coders.codebook
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.android.volley.Response
+import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
@@ -18,6 +20,7 @@ class login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
 
         val blogin = findViewById<Button>(R.id.login_enter)
         val bsignup = findViewById<Button>(R.id.to_signup_button)
@@ -26,7 +29,6 @@ class login : AppCompatActivity() {
         val editPassword = findViewById<EditText>(R.id.enterPassword)
 
         val C: login = this
-
         blogin.setOnClickListener( View.OnClickListener {
             if (Network.vNetwork(this)){
                 dataUser.create(editNickname.getText().toString(), editPassword.getText().toString())

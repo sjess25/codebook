@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">codebook</string>
+    <string name="app_name">Praxis</string>
     <string name="welcome_text">Welcome!</string>
     <string name="signup_instructions">Please sign up below</string>
     <string name="header_toolbar">Nuevo reto</string>
@@ -13,6 +13,7 @@
     <string name="saveChanges_label">Guardar</string>
     <string name="changeProfilePhoto_label">Cambiar foto</string>
     <string name="createChallengue_label">Crear Desafio</string>
+    <string name="enterLogin_label">Entrar</string>
     /*Label for description items*/
     <string name="name_label">Nombre</string>
     <string name="userName_label">Nombre de Usuario</string>
@@ -20,6 +21,8 @@
     <string name="oldPassword_label">Contraseña actual</string>
     <string name="empty"></string>
     <string name="newPassword_label">Contraseña nueva</string>
+    <string name="login_label">  Iniciar Sesion  </string>
+    <string name="signup_label">  Registrarse  </string>
     /*Languages*/
     <string name="c_label">C</string>
     <string name="java_label">Java</string>
@@ -59,5 +62,7 @@
     <string name="searchview_label">Buscar</string>
     <string name="myChallenges_label">Mis desafios</string>
     <string name="answers_label">Respuestas</string>
+    /*Content descriptions*/
+    <string name="logo_contentDescription">Logo de la aplicacion</string>
 
 </resources>

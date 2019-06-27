@@ -3,8 +3,13 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    
+    <color name="lightPrimary">#FFFFFF</color>
+    <color name="lightPrimaryDark">#BEE4E0</color>
+    <color name="lightSecondary">#009688</color>
 
-    <color name="colorUAMC">#F4812C</color>
+
+    <color name="colorUAMC">#009688</color>
     <color name="colorBgUAMC">#F7F7F7</color>
     <color name="blackUAMC">#222222</color>
     <color name="trueBlack">#000000</color>

@@ -8,12 +8,21 @@
 
     <application
             android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/praxis_logo"
             android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
+            android:roundIcon="@drawable/praxis_logo"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme"
+            android:theme="@style/LightTheme"
             tools:ignore="GoogleAppIndexingWarning">
+
+        <activity android:name=".SplashScreen"
+                  android:theme="@style/LightThemeSplash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".Answers">
         </activity>
         <activity android:name=".Searcher">
@@ -35,11 +44,6 @@
         <activity android:name=".profile">
         </activity>
         <activity android:name=".login">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
     </application>
 

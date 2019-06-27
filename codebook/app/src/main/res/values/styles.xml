@@ -4,8 +4,35 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorUAMC</item>
+        <item name="colorAccent">@color/colorUAMC</item>
+    </style>
+
+
+    <!-- Light Theme -->
+    <style name="LightTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/lightPrimary</item>
+        <item name="colorPrimaryDark">@color/lightSecondary</item>
+        <item name="colorAccent">@color/lightSecondary</item>
+    </style>
+    <!-- Light Theme Splash Screen -->
+    <style name="LightThemeSplash" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/lightPrimary</item>
+        <item name="colorPrimaryDark">@color/trueBlack</item>
+        <item name="colorAccent">@color/lightPrimary</item>
+    </style>
+
+    <!-- Dark Theme -->
+    <style name="DarkTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/trueBlack</item>
+        <item name="colorPrimaryDark">@color/blackUAMC</item>
+        <item name="colorAccent">@color/lightSecondary</item>
+    </style>
+    <!-- Dark Theme Splash Screen-->
+    <style name="DarkThemeSplash" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/trueBlack</item>
+        <item name="colorPrimaryDark">@color/blackUAMC</item>
+        <item name="colorAccent">@color/trueBlack</item>
     </style>
 
 </resources>
