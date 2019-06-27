@@ -33,6 +33,12 @@ server.post('/data', function (req, res) {
     req.body = req.body[0];
     console.error('Was array');
   }
+  
+  var ks = Object.keys(req.body);
+
+  for (var x = 0; x < ks.length; x++) {
+    req.body[ks[x]] = String(req.body[ks[x]]).replace(/\"/g, "\\\"");
+  }
 
   var id = Number(req.body.ID);
 
