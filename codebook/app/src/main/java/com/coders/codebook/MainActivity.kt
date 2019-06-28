@@ -22,7 +22,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mHandler: Handler
     private lateinit var mRunnable:Runnable
 
+
+
     override fun onBackPressed() {
+        val a = Intent(Intent.ACTION_MAIN)
+        a.addCategory(Intent.CATEGORY_HOME)
+        a.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(a)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,11 +44,13 @@ class MainActivity : AppCompatActivity() {
 
         val listChallenge = findViewById<ListView>(R.id.myChallengeList)
         var adapter = custumAdapter(this, userChallengeList.getList(userChallengeList.getIndex("Activos")))
+
         listChallenge.adapter = adapter
 
-        val swipeContainer = findViewById<SwipeRefreshLayout>(R.id.update_main)
+
         mHandler = Handler()
 
+        val swipeContainer = findViewById<SwipeRefreshLayout>(R.id.update_main)
         swipeContainer.setOnRefreshListener {
             mRunnable = Runnable {
                 if (Network.vNetwork(this)) {
