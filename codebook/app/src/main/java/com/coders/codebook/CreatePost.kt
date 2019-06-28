@@ -31,6 +31,11 @@ class CreatePost : AppCompatActivity() {
         val textRef2 = findViewById<EditText>(R.id.link_2)
         val textRef3 = findViewById<EditText>(R.id.link_3)
 
+        val bBack = findViewById<Button>(R.id.back_button)
+        bBack.setOnClickListener {
+            finish()
+        }
+
         bpopup_languages.setOnClickListener {
             val popup_l = PopupMenu(this, bpopup_languages)
             popup_l.inflate(R.menu.programming_languages)

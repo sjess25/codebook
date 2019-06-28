@@ -15,50 +15,60 @@
                 android:text="@string/back_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/back_button"
-                android:layout_weight=".1"
-                style="@style/Widget.AppCompat.Button.Borderless" android:textColor="@color/colorBgUAMC"/>
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Borderless" android:textColor="@color/colorBgUAMC"
+                android:textStyle="bold"/>
         <Button
                 android:text="@string/nickname_label"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/user_nickname" android:layout_weight="12"
-                style="@style/Widget.AppCompat.Button.Borderless" android:textAlignment="viewStart"
-                android:textStyle="bold|italic" android:textSize="18sp"
-                android:textColor="@color/colorBgUAMC" android:textAllCaps="false"/>
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:textSize="30sp"
+                android:textColor="@color/colorBgUAMC" android:textAllCaps="false" android:textAlignment="viewStart"
+                android:layout_marginVertical="10dp" android:textStyle="bold"/>
         <Button
                 android:text="@string/acceptChallenge"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:layout_weight=".1"
+                android:layout_height="wrap_content" android:layout_weight="1"
                 style="@style/Widget.AppCompat.Button.Borderless" android:textColor="@color/colorBgUAMC"
-                android:id="@+id/state_button"/>
+                android:id="@+id/state_button" android:textAlignment="textEnd" android:textSize="14sp"
+                android:ems="9"/>
     </LinearLayout>
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
-                      android:orientation="vertical" android:id="@+id/child_ScrollView">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical" android:id="@+id/child_ScrollView"
+                      android:layout_marginHorizontal="10dp" android:layout_marginVertical="15dp"
+                      android:background="@color/lightPrimaryDark"
+        >
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/h1_layout">
                 <TextView
-                        android:text="Titulo del reto"
+                        android:text="@string/challengeTitle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/challenge_Title" android:layout_weight="8"
-                        android:textStyle="bold" android:textColor="@color/blackUAMC" android:textSize="24sp"/>
+                        android:layout_height="wrap_content" android:id="@+id/challenge_Title" android:layout_weight="6"
+                        android:textStyle="bold" android:textColor="@color/lightPrimary" android:textSize="24sp"
+                        android:background="@color/lightSecondary" android:paddingLeft="5dp" android:ems="10"/>
                 <TextView
-                        android:text="n dias restantes"
+                        android:text="@string/timeRemaining"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/challenge_Status"
+                        android:layout_height="match_parent" android:id="@+id/challenge_Status"
                         android:layout_weight="1"
-                        android:textSize="18sp" android:textAlignment="textEnd" android:textStyle="bold"/>
+                        android:textSize="18sp" android:textAlignment="viewEnd" android:textStyle="bold"
+                        android:background="@color/lightSecondary" android:paddingRight="10dp"
+                        android:paddingTop="5dp"/>
             </LinearLayout>
             <TextView
-                    android:text="Aqui deberia ir la descripcion del reto"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/challenge_description"
-                    android:layout_weight="8"
+                    android:layout_height="0dp" android:id="@+id/challenge_description"
+                    android:layout_weight="40"
 
-                    android:scrollbars="vertical"/>
+                    android:scrollbars="vertical" android:text="@string/challengeDescription"
+                    android:layout_marginHorizontal="15dp" android:layout_marginVertical="10dp"
+                    android:background="@color/lightPrimaryDark"/>
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -67,21 +77,22 @@
                         android:text="@string/like_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/like_button" android:layout_weight="1"
-                        style="@style/Widget.AppCompat.Button" android:background="@color/colorBgUAMC"
-                        android:textColor="@color/blackUAMC"
-                        android:layout_marginStart="5dp"/>
+                        style="@style/Widget.AppCompat.Button" android:background="@color/lightSecondary"
+                        android:textColor="@color/lightPrimary"
+                />
                 <TextView
                         android:text="@string/dislikeMeter_label"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" android:id="@+id/like_meter" android:layout_weight="1"
                         android:textAlignment="center"
-                        android:gravity="center" android:layout_marginEnd="5dp"/>
+                        android:gravity="center"
+                        android:background="@color/lightPrimary"/>
                 <Button
                         android:text="@string/dislike_label"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" android:id="@+id/dislike_button" android:layout_weight="1"
                         style="Widget.AppCompat.Button.Borderless"
-                        android:background="@color/blackUAMC"
+                        android:background="@color/lightSecondary"
                         android:textColor="@color/colorBgUAMC"
                 />
                 <TextView
@@ -89,32 +100,36 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" android:id="@+id/dislike_meter" android:layout_weight="1"
                         android:textAlignment="center"
-                        android:gravity="center" android:layout_marginEnd="5dp"/>
+                        android:gravity="center"
+                        android:background="@color/lightPrimary"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/blbliography_layout">
+                    android:layout_height="wrap_content" android:id="@+id/blbliography_layout"
+                    android:layout_marginVertical="10dp" android:layout_marginHorizontal="10dp">
                 <TextView
-                        android:text="Ayuda para el reto"
+                        android:text="@string/challengeHelp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/bibliograhy_0" android:textStyle="bold"
-                        android:textAlignment="center" android:textSize="20sp"/>
+                        android:textAlignment="viewStart" android:textSize="20sp"
+                        android:layout_marginHorizontal="5dp"/>
                 <TextView
                         android:text="@string/hint_url"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:textSize="20sp"
-                        android:textStyle="bold|italic" android:id="@+id/bibliography_1"/>
+                        android:textStyle="bold|italic" android:id="@+id/bibliography_1"
+                        android:layout_marginHorizontal="10dp"/>
                 <TextView
                         android:text="@string/hint_url"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/bibliography_2" android:textSize="20sp"
-                        android:textStyle="bold|italic"/>
+                        android:textStyle="bold|italic" android:layout_marginHorizontal="10dp"/>
                 <TextView
                         android:text="@string/hint_url"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/bibliography_3" android:textSize="20sp"
-                        android:textStyle="bold|italic"/>
+                        android:textStyle="bold|italic" android:layout_marginHorizontal="10dp"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -17,6 +17,7 @@ class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
 
         logo_app.startAnimation(AnimationUtils.loadAnimation(this, R.anim.splash_in))
         Handler().postDelayed({

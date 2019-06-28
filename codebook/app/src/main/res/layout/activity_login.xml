@@ -6,8 +6,9 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".login" android:orientation="vertical" android:id="@+id/main_layout"
->
+        tools:context=".login"
+        android:orientation="vertical"
+        android:id="@+id/main_layout">
     <ImageView
             android:layout_width="265dp"
             android:layout_height="50dp" app:srcCompat="@drawable/praxis_letras_bold"
@@ -23,8 +24,7 @@
         <LinearLayout
                 android:orientation="horizontal" android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/carpeteo"
-        >
+                android:layout_height="wrap_content" android:id="@+id/carpeteo">
             <Button
                     android:text="@string/login_label"
                     android:layout_width="match_parent"

@@ -16,18 +16,19 @@
                 android:text="@string/back_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/back_button" android:layout_weight=".1"
-                style="@style/Widget.AppCompat.Button.Borderless"/>
+                style="@style/Widget.AppCompat.Button.Borderless" android:textColor="@color/lightPrimary"/>
         <TextView
                 android:text="@string/editProfile_label"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" android:id="@+id/activity_text" android:layout_weight="24"
-                android:textSize="24sp" android:textStyle="bold" android:gravity="center"/>
+                android:textSize="24sp" android:textStyle="bold" android:gravity="center"
+                android:textColor="@color/lightPrimary"/>
         <Button
                 android:text="@string/saveChanges_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/save_button" android:layout_weight=".1"
                 style="@style/Widget.AppCompat.Button.Borderless"
-                android:textColor="@android:color/secondary_text_light"/>
+                android:textColor="@color/lightPrimary"/>
     </LinearLayout>
     <ScrollView
             android:layout_width="match_parent"

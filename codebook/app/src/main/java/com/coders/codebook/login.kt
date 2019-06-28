@@ -17,6 +17,11 @@ import java.lang.Exception
 
 class login : AppCompatActivity() {
 
+    override fun onDestroy() {
+        super.onDestroy()
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -68,9 +73,9 @@ class login : AppCompatActivity() {
 
                                                 userChallengeList.insertListChallenge(userChallengeList.getIndex("Activos"))
                                                 listChallenges.clear()
-                                                (this as login).finish()
                                                 val intent = Intent(this, MainActivity::class.java)
                                                 startActivity(intent)
+                                                finish()
                                             } catch (e:Exception) {
                                                 Log.d("error json active challenge", e.message)
                                             }
@@ -103,9 +108,9 @@ class login : AppCompatActivity() {
         } )
 
         bsignup.setOnClickListener(View.OnClickListener {
-            (this as login).finish()
             val intent = Intent(this, signup::class.java)
             startActivity(intent)
+            finish()
         })
     }
 }

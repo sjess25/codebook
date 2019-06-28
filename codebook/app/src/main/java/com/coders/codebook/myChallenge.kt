@@ -6,10 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import android.widget.AdapterView
-import android.widget.ListView
-import android.widget.SearchView
-import android.widget.Toast
+import android.widget.*
 import com.android.volley.Response
 import org.json.JSONArray
 import org.json.JSONObject
@@ -27,16 +24,20 @@ class myChallenge : AppCompatActivity() {
         val bundle: Bundle? =intent.extras
         val idTec: String = bundle!!.getString("id")!!
 
-
         val listChallenge = findViewById<ListView>(R.id.myChallengeList)
         val adapter = custumAdapter(this, userChallengeList.getList(userChallengeList.getIndex(idTec)))
         listChallenge.adapter = adapter
 
         val search = findViewById<SearchView>(R.id.searchChallenges)
-
         search.setOnClickListener {
             search.setIconifiedByDefault(false)
         }
+
+        val bBack = findViewById<Button>(R.id.back_button)
+        bBack.setOnClickListener {
+            finish()
+        }
+
 
 
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

@@ -6,74 +6,80 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity" android:orientation="vertical"
-        android:background="@color/colorBgUAMC">
-    <android.support.constraint.ConstraintLayout
+        android:background="@color/colorBgUAMC" android:id="@+id/main_layout">
+    <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:background="@color/colorUAMC">
-
+            android:layout_height="wrap_content" android:id="@+id/toolbar" android:background="@color/lightSecondary"
+    >
         <TextView
                 android:text="@string/app_name"
-                android:layout_width="206dp"
-                android:layout_height="51dp" android:id="@+id/textView2"
-                android:layout_marginTop="24dp"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toStartOf="@+id/vw_profiles"
-                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="40dp" android:textAlignment="center" android:fontFamily="monospace"
-                android:textStyle="bold" android:textSize="36sp" android:textColor="#FFFFFF"/>
+                android:layout_width="0dp"
+                android:layout_height="match_parent" android:id="@+id/app_name_text"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/old_standard_tt"
+                android:textStyle="bold" android:textSize="40sp" android:textColor="#FFFFFF"
+                android:layout_weight="1" android:gravity="center"/>
         <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@mipmap/f_icon"
-                android:id="@+id/vw_profiles" android:layout_marginTop="16dp"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"/>
-    </android.support.constraint.ConstraintLayout>
+                android:id="@+id/profile_picture"
+                android:contentDescription="@string/profilePicture_contentDescription"/>
+    </LinearLayout>
     <TextView
-            android:text="Mis retos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView3"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@color/blackUAMC"
-            android:textColor="#FFFFFF" android:textSize="30sp"/>
+            android:textColor="#FFFFFF" android:textSize="20sp" android:id="@+id/challengeByTechnology_text"
+            android:text="@string/searchByChallenge_label" android:paddingHorizontal="5dp"/>
     <HorizontalScrollView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:background="#00C7BFBF">
+            android:layout_height="wrap_content" android:background="#00C7BFBF"
+            android:id="@+id/challenges_scrollingView">
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent" android:id="@+id/challengesByTech_layout">
             <ImageButton
                     android:layout_width="80dp"
                     android:layout_height="80dp" app:srcCompat="@drawable/c" android:id="@+id/c_challenges"
                     android:layout_weight="1" android:scaleType="centerCrop"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:contentDescription="@string/cImage_contentDescription"/>
             <ImageButton
                     android:layout_width="80dp"
                     android:layout_height="80dp" app:srcCompat="@drawable/java" android:id="@+id/java_challenges"
                     android:layout_weight="1" android:scaleType="centerCrop"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:contentDescription="@string/javaImage_contentDescription"/>
             <ImageButton
                     android:layout_width="80dp"
                     android:layout_height="80dp" app:srcCompat="@drawable/prolog" android:id="@+id/prolog_challenges"
                     android:layout_weight="1" android:scaleType="centerCrop"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:contentDescription="@string/prologImage_contentDescription"/>
             <ImageButton
                     android:layout_width="80dp"
                     android:layout_height="80dp" app:srcCompat="@drawable/ruby" android:id="@+id/ruby_challenges"
                     android:layout_weight="1" android:scaleType="centerCrop"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:contentDescription="@string/rubyImage_contentDescription"/>
             <ImageButton
                     android:layout_width="80dp"
                     android:layout_height="80dp" app:srcCompat="@drawable/praxis_logo"
                     android:id="@+id/praxis_challenges"
                     android:layout_weight="1" android:scaleType="centerCrop"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:contentDescription="@string/praxisImage_contentDescription"/>
         </LinearLayout>
     </HorizontalScrollView>
     <TextView
-            android:text="Nuevos retos"
+            android:text="@string/activeChallenges_label"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView5" android:background="@color/blackUAMC"
-            android:textSize="30sp" android:textColor="#FFFFFF"/>
+            android:layout_height="wrap_content" android:id="@+id/activeChallenges_text"
+            android:background="@color/blackUAMC"
+            android:textSize="20sp" android:textColor="#FFFFFF" android:paddingHorizontal="5dp"/>
     <android.support.v4.widget.SwipeRefreshLayout
             android:orientation="vertical"
             android:layout_width="match_parent"

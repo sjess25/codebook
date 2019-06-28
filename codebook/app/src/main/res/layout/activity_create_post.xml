@@ -9,7 +9,7 @@
 
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/toolbar_layout">
+            android:layout_height="wrap_content" android:id="@+id/toolbar">
 
         <Button
                 android:text="@string/back_label"
@@ -17,9 +17,9 @@
                 android:layout_height="48dp" android:id="@+id/back_button"
                 android:background="@color/colorUAMC" android:textColor="@color/colorBgUAMC" android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+                app:layout_constraintTop_toTopOf="parent" style="@style/Widget.AppCompat.Button.Borderless"/>
         <TextView
-                android:text="@string/header_toolbar"
+                android:text="@string/createPost_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/header" android:layout_weight="1"
                 android:textSize="25sp"
@@ -54,51 +54,59 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/header_layout">
                 <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
                         android:ems="10"
                         android:id="@+id/challenge_tittle" android:layout_weight="1"
-                        android:hint="Titulo llamativo para el reto" android:textSize="24sp"
-                        android:textStyle="bold|italic"/>
+                        android:textSize="24sp"
+                        android:textStyle="bold|italic" android:layout_marginHorizontal="5dp"
+                        android:layout_marginVertical="10dp" android:hint="@string/hint_title"
+                        android:autofillHints="@string/empty"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/popup_layout">
                 <Button
-                        android:text="Lenguaje"
+                        android:text="@string/language_popup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/languages_popup" android:layout_weight="1"
                         android:layout_marginStart="5dp" android:layout_marginEnd="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"/>
+                        android:layout_marginBottom="5dp" style="@style/Widget.AppCompat.Button.Borderless"
+                        android:background="@color/lightSecondary" android:textColor="@color/lightPrimary"/>
                 <Button
-                        android:text="Dificultad"
+                        android:text="@string/difficulty_popup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/dificulty_popup" android:layout_weight="1"
                         android:layout_marginStart="5dp" android:layout_marginEnd="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"/>
+                        android:layout_marginBottom="5dp" style="@style/Widget.AppCompat.Button.Borderless"
+                        android:background="@color/lightSecondary" android:textColor="@color/lightPrimary"/>
                 <Button
-                        android:text="Tiempo"
+                        android:text="@string/time_popup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/time_popup" android:layout_weight="1"
                         android:layout_marginStart="5dp" android:layout_marginEnd="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"/>
+                        android:layout_marginBottom="5dp" style="@style/Widget.AppCompat.Button.Borderless"
+                        android:background="@color/lightSecondary" android:textColor="@color/lightPrimary"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp" android:layout_weight="10" android:id="@+id/description_layout">
+                    android:layout_height="0dp" android:layout_weight="10" android:id="@+id/description_layout"
+                    android:layout_marginHorizontal="10dp">
                 <EditText
                         android:layout_width="match_parent"
                         android:layout_height="322dp"
                         android:inputType="textMultiLine"
                         android:gravity="start|top"
                         android:ems="10"
-                        android:id="@+id/challenge_description" android:hint="Describe aqui el reto"/>
+                        android:id="@+id/challenge_description" android:hint="@string/hint_challengeDescription"
+                        android:layout_marginHorizontal="10dp" android:layout_marginVertical="5dp"
+                        android:autofillHints="@string/empty"/>
                 <TextView
                         android:text="@string/warning_bibliography"
                         android:layout_width="match_parent"
@@ -109,19 +117,19 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
                         android:ems="10"
-                        android:id="@+id/link_1" android:hint="@string/hint_url"/>
+                        android:id="@+id/link_1" android:hint="@string/hint_url" android:autofillHints="@string/empty"/>
                 <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
                         android:ems="10"
-                        android:id="@+id/link_2" android:hint="@string/hint_url"/>
+                        android:id="@+id/link_2" android:hint="@string/hint_url" android:autofillHints="@string/empty"/>
                 <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
                         android:ems="10"
-                        android:id="@+id/link_3" android:hint="@string/hint_url"/>
+                        android:id="@+id/link_3" android:hint="@string/hint_url" android:autofillHints="@string/empty"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

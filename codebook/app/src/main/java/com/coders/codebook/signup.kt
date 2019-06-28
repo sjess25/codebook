@@ -16,9 +16,16 @@ import java.util.regex.Pattern
 
 class signup : AppCompatActivity() {
 
+    override fun onDestroy() {
+        super.onDestroy()
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
+
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
 
         val bfacebook = findViewById<Button>(R.id.facebook_signup_button)
         val bgmail = findViewById<Button>(R.id.gmail_signup_button)
@@ -29,6 +36,8 @@ class signup : AppCompatActivity() {
         val editname = findViewById<EditText>(R.id.full_name)
         val editPassword = findViewById<EditText>(R.id.password_signup)
         val editEmail = findViewById<EditText>(R.id.email_signup)
+
+        val blogin = findViewById<Button>(R.id.to_login_button)
 
 
         bregistrer.setOnClickListener {
@@ -98,6 +107,11 @@ class signup : AppCompatActivity() {
 
         bgmail.setOnClickListener(View.OnClickListener {
             Toast.makeText(this, "Registro por GMail", Toast.LENGTH_SHORT).show()
+        })
+        blogin.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, login::class.java)
+            startActivity(intent)
+            finish()
         })
     }
 

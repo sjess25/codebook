@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">Praxis</string>
-    <string name="welcome_text">Welcome!</string>
-    <string name="signup_instructions">Please sign up below</string>
-    <string name="header_toolbar">Nuevo reto</string>
     /*Labels for actions*/
     <string name="back_label">X</string>
     <string name="post_label">Publicar</string>
@@ -14,15 +11,29 @@
     <string name="changeProfilePhoto_label">Cambiar foto</string>
     <string name="createChallengue_label">Crear Desafio</string>
     <string name="enterLogin_label">Entrar</string>
+    <string name="login_label">  Iniciar Sesion  </string>
+    <string name="signup_label">  Registrarse  </string>
+    <string name="accept_label">Aceptar</string>
+    <string name="follow_label">Seguir</string>
+    <string name="unfollow_label">Dejar de seguir</string>
+
     /*Label for description items*/
+    <string name="empty"></string>
     <string name="name_label">Nombre</string>
     <string name="userName_label">Nombre de Usuario</string>
     <string name="email_label">Correo</string>
     <string name="oldPassword_label">Contraseña actual</string>
-    <string name="empty"></string>
     <string name="newPassword_label">Contraseña nueva</string>
-    <string name="login_label">  Iniciar Sesion  </string>
-    <string name="signup_label">  Registrarse  </string>
+    <string name="nickname_label">"@Usuario"</string>
+    <string name="challengeTitle">Titulo del reto</string>
+    <string name="timeRemaining">n dias restantes</string>
+    <string name="challengeDescription">Descripcion del reto</string>
+    <string name="challengeHelp">Ayuda para el reto</string>
+    <string name="challengeSolution">Solucion reto</string>
+    <string name="time_popup">Tiempo</string>
+    <string name="language_popup">Lenguaje</string>
+    <string name="difficulty_popup">Dificultad</string>
+
     /*Languages*/
     <string name="c_label">C</string>
     <string name="java_label">Java</string>
@@ -41,28 +52,42 @@
     <string name="time2_label">2</string>
     <string name="time3_label">4</string>
     <string name="time4_label">7</string>
+
     /*Notices*/
-    <string name="warning_bibliography">*Puedes agregar enlaces a bibliografia, documentos o informacion que pueden ser
-        de ayuda para quien tome el reto
+    <string name="warning_bibliography">*Puedes agregar enlaces a bibliografia, documentos o informacion que pueden ser de ayuda para quien tome el reto
     </string>
     <string name="hint_url">https://</string>
     <string name="warning_post_solution">*Para publicar tu reto debes de conocer la solucion</string>
-    <string name="hint_solution_techer">Por favor ingrese la solucion aqui...</string>
+    <string name="hint_solution_teacher">Por favor ingrese la solucion aqui...</string>
     <string name="hint_searchViewer">Buscar reto...</string>
     <string name="hint_nickName">Nombre de Usuario</string>
     <string name="hint_password">Contraseña</string>
+    <string name="hint_searchViewer2">Vuelve a tocar para escribir</string>
+    <string name="hint_title">Titulo llamativo para el reto</string>
+    <string name="hint_challengeDescription">Describe aqui el reto</string>
+
     /*Variables? aun no se como se usan*/
-    <string name="nickname_label">"@Usuario"</string>
-    <string name="follow_label">Seguir</string>
-    <string name="unfollow_label">Dejar de seguir</string>
     <string name="likeMeter_label">0</string>
     <string name="dislikeMeter_label">0</string>
+
     /*activity labels*/
     <string name="editProfile_label">Editar perfil</string>
     <string name="searchview_label">Buscar</string>
     <string name="myChallenges_label">Mis desafios</string>
+    <string name="createPost_label">Nuevo reto</string>
+    <string name="searchByChallenge_label">Retos por tecnologia</string>
+    <string name="activeChallenges_label">Retos activos</string>
+    <string name="searchChallenges">Buscar reto</string>
     <string name="answers_label">Respuestas</string>
+    <string name="profile_label">Mi perfil</string>
+
     /*Content descriptions*/
     <string name="logo_contentDescription">Logo de la aplicacion</string>
+    <string name="profilePicture_contentDescription">Foto de perfil</string>
+    <string name="cImage_contentDescription">Imagen para la tecnologia C</string>
+    <string name="javaImage_contentDescription">Imagen para la tecnologia Java</string>
+    <string name="prologImage_contentDescription">Imagen para la tecnologia prolog</string>
+    <string name="rubyImage_contentDescription">Imagen para la tecnologia Ruby</string>
+    <string name="praxisImage_contentDescription">Imagen para la tecnologia Praxis</string>
 
 </resources>

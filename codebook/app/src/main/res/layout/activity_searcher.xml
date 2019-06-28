@@ -5,31 +5,27 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:context=".Searcher" android:orientation="vertical">
+        tools:context=".Searcher" android:orientation="vertical" android:id="@+id/main_layout">
 
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:background="@color/colorUAMC">
+            android:layout_height="match_parent" android:background="@color/colorUAMC" android:id="@+id/header_layout">
         <Button
                 android:text="@string/back_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/back_button"
-                style="@style/Widget.AppCompat.Button.Borderless"/>
+                style="@style/Widget.AppCompat.Button.Borderless" android:textColor="@color/lightPrimary"
+                android:textStyle="bold" android:layout_weight="1"/>
         <TextView
-                android:text="Resultados"
-                android:layout_width="match_parent"
+                android:text="@string/answers_label"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView4" android:textAlignment="center" android:textStyle="bold"
-                android:textSize="24sp" android:textColor="@color/trueWhite"/>
+                android:id="@+id/answers_label" android:textAlignment="viewStart"
+                android:textSize="30sp" android:textColor="@color/trueWhite" android:layout_weight="7"
+                android:layout_marginVertical="10dp"/>
     </LinearLayout>
-    <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical"/>
-    </ScrollView>
     <ListView
             android:layout_width="wrap_content"
-            android:layout_height="593dp" android:id="@+id/searchList"/>
+            android:layout_height="match_parent" android:id="@+id/searchList"/>
 </LinearLayout>

@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import com.android.volley.Response
-import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
 
@@ -18,7 +17,12 @@ class profile : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
 
         val bcreatePost = findViewById<Button>(R.id.createPost_button)
-        val beditProfile = findViewById<ImageButton>(R.id.vw_profiles)
+        val beditProfile = findViewById<ImageButton>(R.id.profile_picture)
+
+        val bBack = findViewById<Button>(R.id.back_button)
+        bBack.setOnClickListener {
+            finish()
+        }
 
 
         val listChallenge = findViewById<ListView>(R.id.myChallengeList)

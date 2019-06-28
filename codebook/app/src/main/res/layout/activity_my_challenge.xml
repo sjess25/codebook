@@ -5,40 +5,34 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".myChallenge" android:orientation="vertical">
+        tools:context=".myChallenge" android:orientation="vertical" android:id="@+id/main_layout">
 
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:background="@color/colorUAMC">
+            android:layout_height="wrap_content" android:background="@color/colorUAMC" android:gravity="center"
+            android:id="@+id/header_layout">
+        <Button
+                android:text="@string/back_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/back_button" android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Borderless" android:textColor="@color/lightPrimary"
+                android:textStyle="bold"/>
         <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="54dp" android:id="@+id/textView2"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="40dp" android:textAlignment="center" android:fontFamily="monospace"
-                android:textStyle="bold" android:textSize="36sp" android:textColor="#FFFFFF"
-                android:text="@string/myChallenges_label"/>
-        <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" app:srcCompat="@mipmap/f_icon"
-                android:id="@+id/vw_profiles" android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"/>
+                android:layout_height="wrap_content" android:id="@+id/app_name_text"
+                android:textAlignment="viewStart"
+                android:textSize="30sp" android:textColor="#FFFFFF"
+                android:text="@string/searchChallenges" android:layout_marginVertical="10dp" android:layout_weight="7"/>
     </LinearLayout>
     <SearchView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:queryHint="@string/hint_searchViewer"
-            android:id="@+id/searchChallenges" android:clickable="true"/>
-    <ScrollView
+            android:layout_height="wrap_content" android:queryHint="@string/hint_searchViewer2"
+            android:id="@+id/searchChallenges" android:clickable="true">
+    </SearchView>
+    <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical">
-            <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="496dp" android:background="@color/colorBgUAMC"
-                    android:id="@+id/myChallengeList">
-            </ListView>
-        </LinearLayout>
-    </ScrollView>
+            android:layout_height="wrap_content" android:background="@color/colorBgUAMC"
+            android:id="@+id/myChallengeList">
+    </ListView>
 </LinearLayout>
