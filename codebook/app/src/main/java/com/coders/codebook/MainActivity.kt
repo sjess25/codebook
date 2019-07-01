@@ -23,6 +23,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mRunnable:Runnable
 
     override fun onBackPressed() {
+        val a = Intent(Intent.ACTION_MAIN)
+        a.addCategory(Intent.CATEGORY_HOME)
+        a.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(a)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -211,7 +215,7 @@ class MainActivity : AppCompatActivity() {
                 intentChallenge.putExtra("id", technology)
                 startActivity(intentChallenge)
             } catch (e:Exception) {
-                Log.d("json active challenge", response_Array.toString())
+                Log.d("json finish challenge", response_Array.toString())
             }
         })
     }

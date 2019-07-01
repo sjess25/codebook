@@ -14,6 +14,8 @@ import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
+import java.net.URI
+import java.net.URLEncoder
 
 class login : AppCompatActivity() {
 
@@ -37,7 +39,8 @@ class login : AppCompatActivity() {
         blogin.setOnClickListener( View.OnClickListener {
             if (Network.vNetwork(this)){
                 dataUser.create(editNickname.getText().toString(), editPassword.getText().toString())
-                Network.getHTTP(this, "http://35.231.202.82:81/login?user=${dataUser.getNickName()}&password=${dataUser.getPassword()}", Response.Listener<String>{
+                Log.d("login", "password "+ dataUser.getPassword())
+                Network.getHTTP(this, "http://35.231.202.82:81/login?user=${URLEncoder.encode(dataUser.getNickName())}&password=${URLEncoder.encode(dataUser.getPassword())}", Response.Listener<String>{
                         response ->
                     try {
                         if (response == "0") {

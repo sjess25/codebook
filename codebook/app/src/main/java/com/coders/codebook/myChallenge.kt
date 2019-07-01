@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.support.v4.widget.SwipeRefreshLayout
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
@@ -13,6 +15,9 @@ import org.json.JSONObject
 import java.lang.Exception
 
 class myChallenge : AppCompatActivity() {
+
+    private lateinit var mHandler: Handler
+    private lateinit var mRunnable:Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +30,7 @@ class myChallenge : AppCompatActivity() {
         val idTec: String = bundle!!.getString("id")!!
 
         val listChallenge = findViewById<ListView>(R.id.myChallengeList)
-        val adapter = custumAdapter(this, userChallengeList.getList(userChallengeList.getIndex(idTec)))
+        var adapter = custumAdapter(this, userChallengeList.getList(userChallengeList.getIndex(idTec)))
         listChallenge.adapter = adapter
 
         val search = findViewById<SearchView>(R.id.searchChallenges)
@@ -38,6 +43,49 @@ class myChallenge : AppCompatActivity() {
             finish()
         }
 
+
+        val swipeContainer = findViewById<SwipeRefreshLayout>(R.id.update_finishChalenge)
+        mHandler = Handler()
+
+        swipeContainer.setOnRefreshListener {
+            mRunnable = Runnable {
+
+                val paramsArray = java.util.LinkedHashMap<String, String>()
+                paramsArray["ID"] = 6.toString()
+                paramsArray["Who"] = dataUser.getID().toString()
+                paramsArray["Technologie"] = dataUser.getIDTechnology(idTec).toString()
+                val jsonChallenge = JSONObject(paramsArray)
+                val jsonKeyAChallenge = JSONArray()
+                jsonKeyAChallenge.put(jsonChallenge)
+
+                Network.getJsonArray(this, "http://35.231.202.82:81/data", jsonKeyAChallenge, Response.Listener<JSONArray>{
+                        response_Array ->
+                    try {
+                        userChallengeList.allChallenge[userChallengeList.getIndex(idTec)]!!.clear()
+                        Log.d("json send technologie", jsonKeyAChallenge.toString())
+                        Log.d("json finish challenge", response_Array.toString())
+
+                        for (i in 0.. (response_Array.length() - 1)){
+                            listChallenges.insertChallenge(technology(response_Array.getJSONObject(i).getInt("ID"), response_Array.getJSONObject(i).getString("Title"), response_Array.getJSONObject(i).getString("Description"), dataUser.getDrawable(response_Array.getJSONObject(i).getInt("Technologie"))))
+                            Log.d("list challenge", listChallenges.getList().get(i).title)
+                        }
+
+                        userChallengeList.insertListChallenge(userChallengeList.getIndex(idTec))
+                        listChallenges.clear()
+
+                        adapter = custumAdapter(this, userChallengeList.getList(userChallengeList.getIndex(idTec)))
+                        listChallenge.adapter = adapter
+
+                    } catch (e:Exception) {
+                        Log.d("json active challenge", response_Array.toString())
+                    }
+                })
+
+                swipeContainer.isRefreshing = false
+            }
+            mHandler.postDelayed(mRunnable,
+                1500.toLong())
+        }
 
 
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
